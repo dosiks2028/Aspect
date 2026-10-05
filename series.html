@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Series | Row Five</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-md site-nav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Row Five</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Open menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="picker.html">Movie Picker</a></li>
+            <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
+            <li class="nav-item"><a class="nav-link active" href="series.html">Series</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <p class="eyebrow">Tonight on Row Five TV</p>
+        <h1>Series</h1>
+        <p class="page-lead">Six series, one TV guide. Every bar shows how long the series takes, so you know what you sign up for.</p>
+      </div>
+    </section>
+
+    <!-- TV guide: one row per series -->
+    <section class="guide">
+      <div class="container">
+        <h2>The TV guide</h2>
+        <p class="section-text">From a short weekend to a long winter. The bar counts total watching time, and we count two hours per evening.</p>
+
+        <div class="guide-list">
+
+          <article class="guide-row t-teal">
+            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">01</span></div>
+            <div class="guide-info">
+              <h3>Fleabag</h3>
+              <p class="guide-meta">Comedy-drama · 2 seasons · 12 episodes</p>
+              <p>Sharp, funny and suddenly sad. Short episodes, big feelings.</p>
+            </div>
+            <div class="guide-meter">
+              <p class="meter-label">About 3 evenings</p>
+              <div class="progress" role="progressbar" aria-label="Fleabag: about 5 hours of 75" aria-valuenow="5" aria-valuemin="0" aria-valuemax="75">
+                <div class="progress-bar" style="width: 7%"></div>
+              </div>
+              <p class="meter-hours">About 5 hours in total</p>
+            </div>
+          </article>
+
+          <article class="guide-row t-coral">
+            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">02</span></div>
+            <div class="guide-info">
+              <h3>Chernobyl</h3>
+              <p class="guide-meta">Drama · 1 season · 5 episodes</p>
+              <p>The 1986 disaster, told hour by hour. Heavy, but hard to stop.</p>
+            </div>
+            <div class="guide-meter">
+              <p class="meter-label">About 3 evenings</p>
+              <div class="progress" role="progressbar" aria-label="Chernobyl: about 5.5 hours of 75" aria-valuenow="5.5" aria-valuemin="0" aria-valuemax="75">
+                <div class="progress-bar" style="width: 8%"></div>
+              </div>
+              <p class="meter-hours">About 5.5 hours in total</p>
+            </div>
+          </article>
+
+          <article class="guide-row t-violet">
+            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">03</span></div>
+            <div class="guide-info">
+              <h3>The Queen's Gambit</h3>
+              <p class="guide-meta">Drama · 1 season · 7 episodes</p>
+              <p>A girl, a chessboard and a very stylish 1960s. You do not need to know chess.</p>
+            </div>
+            <div class="guide-meter">
+              <p class="meter-label">About 4 evenings</p>
+              <div class="progress" role="progressbar" aria-label="The Queen's Gambit: about 6.5 hours of 75" aria-valuenow="6.5" aria-valuemin="0" aria-valuemax="75">
+                <div class="progress-bar" style="width: 9%"></div>
+              </div>
+              <p class="meter-hours">About 6.5 hours in total</p>
+            </div>
+          </article>
+
+          <article class="guide-row t-mustard">
+            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">04</span></div>
+            <div class="guide-info">
+              <h3>Sherlock</h3>
+              <p class="guide-meta">Crime · 4 seasons · 13 episodes</p>
+              <p>Modern London, old Baker Street. Each episode is a full-length movie.</p>
+            </div>
+            <div class="guide-meter">
+              <p class="meter-label">About 10 evenings</p>
+              <div class="progress" role="progressbar" aria-label="Sherlock: about 20 hours of 75" aria-valuenow="20" aria-valuemin="0" aria-valuemax="75">
+                <div class="progress-bar" style="width: 27%"></div>
+              </div>
+              <p class="meter-hours">About 20 hours in total</p>
+            </div>
+          </article>
+
+          <article class="guide-row t-coral">
+            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">05</span></div>
+            <div class="guide-info">
+              <h3>Breaking Bad</h3>
+              <p class="guide-meta">Crime drama · 5 seasons · 62 episodes</p>
+              <p>A chemistry teacher makes one bad choice, then many more.</p>
+            </div>
+            <div class="guide-meter">
+              <p class="meter-label">About 25 evenings</p>
+              <div class="progress" role="progressbar" aria-label="Breaking Bad: about 49 hours of 75" aria-valuenow="49" aria-valuemin="0" aria-valuemax="75">
+                <div class="progress-bar" style="width: 65%"></div>
+              </div>
+              <p class="meter-hours">About 49 hours in total</p>
+            </div>
+          </article>
+
+          <article class="guide-row t-teal">
+            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">06</span></div>
+            <div class="guide-info">
+              <h3>The Office (US)</h3>
+              <p class="guide-meta">Comedy · 9 seasons · 201 episodes</p>
+              <p>Paper, desks and awkward silence. A comfort show you can start anywhere.</p>
+            </div>
+            <div class="guide-meter">
+              <p class="meter-label">About 37 evenings</p>
+              <div class="progress" role="progressbar" aria-label="The Office: about 73 hours of 75" aria-valuenow="73" aria-valuemin="0" aria-valuemax="75">
+                <div class="progress-bar" style="width: 97%"></div>
+              </div>
+              <p class="meter-hours">About 73 hours in total</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Pick by free time -->
+    <section class="timebox">
+      <div class="container">
+        <h2>How much time do you have?</h2>
+        <div class="row g-4 mt-1">
+          <div class="col-12 col-md-4">
+            <div class="time-card">
+              <h3>One weekend</h3>
+              <p>Fleabag, Chernobyl or The Queen's Gambit. You finish before Monday.</p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="time-card">
+              <h3>Two weeks</h3>
+              <p>Sherlock. One long episode every evening and a mystery to solve each time.</p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="time-card">
+              <h3>A whole season of life</h3>
+              <p>Breaking Bad or The Office. Clear your calendar and tell your friends.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Row Five. Student project, Midterm, Web Technologies 1.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
