@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About | Row Five</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-md site-nav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Row Five</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Open menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="picker.html">Movie Picker</a></li>
+            <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
+            <li class="nav-item"><a class="nav-link" href="series.html">Series</a></li>
+            <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <p class="eyebrow">Behind the scenes</p>
+        <h1>About Row Five</h1>
+        <p class="page-lead">A tiny movie club website that helps you stop scrolling and start watching.</p>
+      </div>
+    </section>
+
+    <!-- Story: text + three facts (Grid) -->
+    <section class="story">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <div class="col-12 col-lg-6">
+            <h2>Why Row Five?</h2>
+            <p>Every evening the same thing happens: you open a streaming app, scroll for forty minutes and watch nothing. We wanted a calmer way to choose.</p>
+            <p>In a cinema, row five is the sweet spot: not too close, not too far. Our website is built on the same idea. You tell us your mood, and we give you one good movie.</p>
+          </div>
+          <div class="col-12 col-lg-6">
+            <ul class="facts">
+              <li><span class="fact-num">5</span> pages in one cinema hall</li>
+              <li><span class="fact-num">2</span> questions to get your ticket</li>
+              <li><span class="fact-num">0</span> hours wasted on scrolling</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cast & Crew: team members -->
+    <section class="cast-section">
+      <div class="container">
+        <h2>Cast &amp; Crew</h2>
+        <p class="section-text">The people who built this website, and what each of them did.</p>
+
+        <div class="cast-grid">
+          <article class="cast t-coral">
+            <p class="cast-role">Director</p>
+            <h3>Student Name 1</h3>
+            <p>Home page, cinema hall hero, ticket cards.</p>
+          </article>
+          <article class="cast t-teal">
+            <p class="cast-role">Producer</p>
+            <h3>Student Name 2</h3>
+            <p>Movie Picker page, form and table.</p>
+          </article>
+          <article class="cast t-violet">
+            <p class="cast-role">Editor</p>
+            <h3>Student Name 3</h3>
+            <p>Catalog, Series and About pages.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rolling credits -->
+    <section class="roll-section">
+      <div class="container">
+        <h2>The End</h2>
+        <div class="roll" aria-label="Rolling credits of the project">
+          <div class="roll-inner">
+            <p class="roll-small">A Web Technologies 1 production</p>
+            <p class="roll-big">ROW FIVE</p>
+            <p class="roll-small">Directed by</p>
+            <p>Student Name 1</p>
+            <p class="roll-small">Produced by</p>
+            <p>Student Name 2</p>
+            <p class="roll-small">Edited by</p>
+            <p>Student Name 3</p>
+            <p class="roll-small">No popcorn was harmed</p>
+            <p class="roll-big">THANK YOU</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ: Bootstrap accordion -->
+    <section class="faq">
+      <div class="container">
+        <h2>Questions &amp; answers</h2>
+        <div class="accordion faq-accordion" id="faq">
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1" aria-expanded="true" aria-controls="q1">
+                Where can I watch these movies?
+              </button>
+            </h3>
+            <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faq">
+              <div class="accordion-body">We do not stream anything. Row Five only helps you choose. Then you open your favorite service and press play.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2" aria-expanded="false" aria-controls="q2">
+                How do you choose the movies?
+              </button>
+            </h3>
+            <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faq">
+              <div class="accordion-body">We picked them by hand. For every mood we chose one short and one long movie that we would happily watch again.</div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3" aria-expanded="false" aria-controls="q3">
+                Is this a real company?
+              </button>
+            </h3>
+            <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faq">
+              <div class="accordion-body">No, it is a student project made for the Web Technologies 1 course.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="sources">
+      <div class="container">
+        <h2>Credits</h2>
+        <ul class="sources-list">
+          <li><strong>Fonts:</strong> Bowlby One and Outfit, Google Fonts.</li>
+          <li><strong>Framework:</strong> Bootstrap 5.3 (grid, navbar, table, accordion).</li>
+          <li><strong>Everything else:</strong> illustrations are pure CSS, made by our team.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Row Five. Student project, Midterm, Web Technologies 1.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

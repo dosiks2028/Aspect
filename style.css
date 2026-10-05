@@ -1,0 +1,373 @@
+/* ===== Colors and fonts in one place (CSS variables) ===== */
+:root {
+  --night: #14060c;       /* dark hall */
+  --velvet: #7d1a2c;      /* curtains */
+  --velvet-dark: #5c0f26;
+  --amber: #ffb938;       /* projector light */
+  --screen: #eaf2ff;      /* cold white screen */
+  --ink: #1b0a12;         /* dark text */
+  --text: #f6eef0;
+
+  --font-title: "Bowlby One", Impact, sans-serif;
+  --font-text: "Outfit", Arial, sans-serif;
+}
+
+/* ===== Common styles for all pages ===== */
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: var(--font-text);
+  line-height: 1.6;
+}
+h1, h2, h3, .navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 400;
+}
+h2 { font-size: 2.2rem; margin-bottom: .5rem; }
+.section-text { margin-bottom: 2.5rem; max-width: 60ch; }
+
+/* ===== Navigation ===== */
+.site-nav { background: var(--velvet-dark); border-bottom: 3px solid var(--amber); }
+.site-nav .navbar-brand { color: var(--amber); font-size: 1.5rem; }
+.site-nav .nav-link { color: var(--text); padding: .6rem 1rem; }
+.site-nav .nav-link:hover,
+.site-nav .nav-link.active { color: var(--amber); }
+.site-nav .navbar-toggler { border-color: var(--amber); }
+.site-nav .navbar-toggler-icon { filter: invert(1); }
+
+/* ===== Hero: cinema hall ===== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 3.5rem 0 2.5rem;
+  background: radial-gradient(ellipse at 50% 0%, #3d1021 0%, var(--night) 70%);
+}
+
+/* Curtains on the left and right (stripes = folds) */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(28px, 8vw, 130px);
+  background: repeating-linear-gradient(90deg, var(--velvet) 0 12px, var(--velvet-dark) 12px 26px);
+}
+.hero::before { left: 0; }
+.hero::after  { right: 0; }
+
+/* Projector beam: a trapezoid made with clip-path */
+.beam {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 80%;
+  height: 100%;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, rgba(255, 240, 200, .28), rgba(255, 240, 200, 0));
+  clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%);
+}
+
+.hero-inner { position: relative; z-index: 1; }
+
+/* The screen itself */
+.screen {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  text-align: center;
+  background: var(--screen);
+  color: var(--ink);
+  border-radius: 10px;
+  box-shadow: 0 0 90px 10px rgba(170, 205, 255, .45);
+}
+.screen h1 {
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.hero-text { font-size: 1.2rem; max-width: 40ch; margin: 0 auto 1.75rem; }
+
+.btn-seat {
+  background: var(--velvet);
+  color: #fff;
+  font-weight: 600;
+  padding: .8rem 2rem;
+  border-radius: 999px;
+  transition: background .2s;
+}
+.btn-seat:hover { background: var(--ink); color: var(--amber); }
+
+/* Row of seats: Flexbox */
+.seats {
+  display: flex;
+  justify-content: center;
+  gap: .6rem;
+  margin-top: 3rem;
+}
+.seat {
+  flex: 1;
+  max-width: 64px;
+  height: 52px;
+  background: var(--velvet);
+  border-radius: 16px 16px 4px 4px;
+}
+.seat-lit {
+  background: var(--amber);
+  box-shadow: 0 0 30px 8px rgba(255, 185, 56, .6);
+}
+
+/* ===== Ticket cards ===== */
+.trends { padding: 4rem 0 5rem; }
+
+.ticket {
+  position: relative;
+  background: var(--c);
+  color: var(--ink);
+  border-radius: 14px;
+  transition: transform .3s;
+}
+.t-coral   { --c: #ff7a6b; }
+.t-teal    { --c: #4fd1c5; }
+.t-violet  { --c: #b79cff; }
+.t-mustard { --c: #ffcf5c; }
+
+.ticket-main { position: relative; padding: 1.5rem 1.5rem 1.75rem; min-height: 200px; }
+.ticket h3 { font-size: 1.5rem; margin-bottom: .25rem; }
+.genre { font-weight: 600; margin-bottom: .75rem; }
+.ticket-main p:last-child { margin-bottom: 0; }
+
+/* Round notches on both sides of the tear line */
+.ticket-main::before,
+.ticket-main::after {
+  content: "";
+  position: absolute;
+  bottom: -13px;
+  width: 26px;
+  height: 26px;
+  background: var(--night);
+  border-radius: 50%;
+  z-index: 2;
+}
+.ticket-main::before { left: -13px; }
+.ticket-main::after  { right: -13px; }
+
+/* Stub that tears off on hover */
+.ticket-stub {
+  padding: .9rem 1.5rem;
+  border-top: 2px dashed var(--ink);
+  font-weight: 600;
+  background: var(--c);
+  border-radius: 0 0 14px 14px;
+  transform-origin: left top;
+  transition: transform .35s;
+}
+.ticket:hover { transform: translateY(-5px); }
+.ticket:hover .ticket-stub { transform: rotate(8deg) translate(10px, 8px); }
+
+/* ===== Footer ===== */
+.site-footer { background: var(--velvet-dark); padding: 1.5rem 0; text-align: center; }
+.site-footer p { margin: 0; }
+
+/* ===== Keyboard focus ===== */
+a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+/* ===== Our own media queries ===== */
+@media (max-width: 767px) {
+  .hero { padding: 2.5rem 0 2rem; }
+  .screen { padding: 2rem 1.25rem; }
+  .seat { height: 42px; }
+}
+@media (min-width: 1200px) {
+  .hero { padding: 5rem 0 3.5rem; }
+}
+
+/* For people who turned animations off */
+@media (prefers-reduced-motion: reduce) {
+  .ticket, .ticket-stub, .btn-seat { transition: none; }
+}
+/* =========================================================
+   PAGE 5: ABOUT
+   ========================================================= */
+
+/* ===== Story + facts ===== */
+.story { padding: 4rem 0 3rem; }
+.story p { max-width: 55ch; }
+
+.facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+.facts li {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(180deg, #2a0f1c, #1d0a14);
+  border: 2px solid var(--velvet);
+  border-radius: 14px;
+  font-size: 1.1rem;
+  transition: transform .25s, border-color .25s;
+}
+.facts li:hover { transform: translateX(8px); border-color: var(--amber); }
+.fact-num {
+  flex: 0 0 auto;
+  min-width: 3.2rem;
+  text-align: center;
+  font-family: var(--font-title);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--amber);
+  text-shadow: 0 0 18px rgba(255, 185, 56, .5);
+}
+
+/* ===== Cast & Crew: Grid ===== */
+.cast-section {
+  padding: 3.5rem 0 4rem;
+  background: linear-gradient(180deg, var(--night), #1d0a14 50%, var(--night));
+}
+.cast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+.cast {
+  position: relative;
+  padding: 1.75rem 1.5rem;
+  background: var(--c);
+  color: var(--ink);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .55);
+  transition: transform .3s;
+}
+/* Small star in the corner */
+.cast::after {
+  content: "\2605";
+  position: absolute;
+  top: .8rem;
+  right: 1.1rem;
+  font-size: 1.6rem;
+  color: var(--ink);
+  opacity: .8;
+  transition: transform .5s;
+}
+.cast:hover { transform: translateY(-8px) rotate(-1deg); }
+.cast:hover::after { transform: rotate(360deg) scale(1.3); }
+.cast-role {
+  display: inline-block;
+  margin-bottom: .75rem;
+  padding: .1rem .8rem;
+  background: var(--ink);
+  color: var(--c);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: .8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.cast h3 { font-size: 1.5rem; }
+.cast p:last-child { margin-bottom: 0; }
+
+/* ===== Rolling credits (the memorable detail) ===== */
+.roll-section { padding: 3.5rem 0; text-align: center; }
+.roll {
+  position: relative;
+  max-width: 560px;
+  height: 340px;
+  margin: 1.5rem auto 0;
+  overflow: hidden;
+  background: #000;
+  border: 6px solid #1c1c24;
+  border-radius: 12px;
+  box-shadow: 0 0 0 3px #3a3a48, 0 20px 50px rgba(0, 0, 0, .7);
+}
+/* Dark fade at the top and bottom of the screen */
+.roll::before,
+.roll::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 70px;
+  z-index: 2;
+  pointer-events: none;
+}
+.roll::before { top: 0;    background: linear-gradient(#000, transparent); }
+.roll::after  { bottom: 0; background: linear-gradient(transparent, #000); }
+
+.roll-inner {
+  padding: 0 1rem;
+  animation: roll-up 22s linear infinite;
+}
+.roll-inner p { margin: 0 0 .4rem; font-size: 1.2rem; }
+.roll-small {
+  margin-top: 1.6rem !important;
+  color: var(--amber);
+  font-size: .85rem !important;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.roll-big {
+  font-family: var(--font-title);
+  font-size: 2.4rem !important;
+  line-height: 1.1;
+  margin: 1.6rem 0 !important;
+}
+.roll:hover .roll-inner { animation-play-state: paused; }
+@keyframes roll-up {
+  from { transform: translateY(340px); }
+  to   { transform: translateY(-100%); }
+}
+
+/* ===== FAQ: styled Bootstrap accordion ===== */
+.faq { padding: 3rem 0 3.5rem; background: #1d0a14; }
+.faq-accordion {
+  --bs-accordion-bg: #2a0f1c;
+  --bs-accordion-color: var(--text);
+  --bs-accordion-border-color: var(--velvet);
+  --bs-accordion-btn-bg: #2a0f1c;
+  --bs-accordion-btn-color: var(--text);
+  --bs-accordion-active-bg: var(--velvet-dark);
+  --bs-accordion-active-color: var(--amber);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(255, 185, 56, .35);
+  max-width: 800px;
+}
+.faq-accordion .accordion-button {
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.faq-accordion .accordion-button::after { filter: invert(1); }
+.faq-accordion .accordion-header { margin: 0; font-size: 1rem; }
+
+/* ===== Sources ===== */
+.sources { padding: 3rem 0 4.5rem; }
+.sources-list { list-style: none; margin: 0; padding: 0; max-width: 700px; }
+.sources-list li {
+  padding: .8rem 0;
+  border-bottom: 2px dashed var(--velvet);
+}
+.sources-list strong { color: var(--amber); }
+
+/* ===== Page 5: media queries ===== */
+@media (min-width: 768px) {
+  .roll { height: 400px; }
+  @keyframes roll-up {
+    from { transform: translateY(400px); }
+    to   { transform: translateY(-100%); }
+  }
+}
+@media (max-width: 767px) {
+  .story { padding: 2.5rem 0 2rem; }
+  .fact-num { font-size: 2rem; }
+  .roll-big { font-size: 1.9rem !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .roll { height: auto; }
+  .roll-inner { animation: none; padding: 1.5rem 1rem; }
+  .roll::before, .roll::after { display: none; }
+  .cast, .cast::after, .facts li { transition: none; }
+}

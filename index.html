@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Row Five | Find tonight's movie</title>
+
+  <!-- Fonts: Bowlby One (headings) and Outfit (text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap first, then our own style (ours must come after) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation: the same on every page -->
+  <header>
+    <nav class="navbar navbar-expand-md site-nav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Row Five</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Open menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="picker.html">Movie Picker</a></li>
+            <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
+            <li class="nav-item"><a class="nav-link" href="series.html">Series</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero: a tiny cinema hall -->
+    <section class="hero">
+      <div class="beam" aria-hidden="true"></div>
+
+      <div class="container hero-inner">
+        <div class="screen">
+          <h1>Stop scrolling. Take a seat.</h1>
+          <p class="hero-text">Tell us your mood and we will pick tonight's movie for you.</p>
+          <a class="btn btn-seat" href="picker.html">Find my movie</a>
+        </div>
+
+        <div class="seats" aria-hidden="true">
+          <span class="seat"></span><span class="seat"></span><span class="seat"></span>
+          <span class="seat"></span><span class="seat seat-lit"></span><span class="seat"></span>
+          <span class="seat"></span><span class="seat"></span><span class="seat"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trending this week: ticket cards -->
+    <section class="trends">
+      <div class="container">
+        <h2>Trending this week</h2>
+        <p class="section-text">Four films people are talking about in our movie club.</p>
+
+        <div class="row g-4">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <article class="ticket t-coral">
+              <div class="ticket-main">
+                <h3>Interstellar</h3>
+                <p class="genre">Sci-Fi</p>
+                <p>For the night you want to look at the stars.</p>
+              </div>
+              <div class="ticket-stub">Row 5 · Seat 1</div>
+            </article>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3">
+            <article class="ticket t-teal">
+              <div class="ticket-main">
+                <h3>Parasite</h3>
+                <p class="genre">Thriller</p>
+                <p>Starts like a comedy. Ends nothing like one.</p>
+              </div>
+              <div class="ticket-stub">Row 5 · Seat 2</div>
+            </article>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3">
+            <article class="ticket t-violet">
+              <div class="ticket-main">
+                <h3>Inception</h3>
+                <p class="genre">Sci-Fi, Action</p>
+                <p>A dream inside a dream. Put your phone away.</p>
+              </div>
+              <div class="ticket-stub">Row 5 · Seat 3</div>
+            </article>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3">
+            <article class="ticket t-mustard">
+              <div class="ticket-main">
+                <h3>The Matrix</h3>
+                <p class="genre">Sci-Fi, Action</p>
+                <p>A classic that is always fun to watch again.</p>
+              </div>
+              <div class="ticket-stub">Row 5 · Seat 4</div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Row Five. Student project, Midterm, Web Technologies 1.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
