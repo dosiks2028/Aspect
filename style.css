@@ -565,3 +565,97 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline
   .mood-btn, .filter-btn, .poster { transition: none; }
   #result .ticket { animation: none; }
 }
+/* =========================================================
+   PAGE 4: SERIES (TV guide)
+   Paste at the very end of style.css, after the Picker/Catalog block
+   ========================================================= */
+.guide { padding: 3.5rem 0 4rem; }
+.guide-list { display: grid; gap: 1.25rem; }
+
+/* One row = one channel. Mobile: everything in one column (Grid) */
+.guide-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: linear-gradient(180deg, #2a0f1c, #1d0a14);
+  border: 2px solid var(--velvet);
+  border-left: 8px solid var(--c);
+  border-radius: 14px;
+  transition: transform .25s, border-color .25s;
+}
+.guide-row:hover { transform: translateX(8px); border-color: var(--c); }
+
+/* Channel box with TV scanlines */
+.guide-ch {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  align-self: start;
+  padding: .6rem 1rem;
+  background: var(--c);
+  color: var(--ink);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.guide-ch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .14) 0 2px, transparent 2px 4px);
+  pointer-events: none;
+}
+.ch-label { font-weight: 600; letter-spacing: 2px; font-size: .85rem; }
+.ch-num { font-family: var(--font-title); font-size: 2.2rem; line-height: 1; }
+
+.guide-info h3 { font-size: 1.5rem; margin-bottom: .25rem; color: var(--c); }
+.guide-meta { font-weight: 600; margin-bottom: .5rem; }
+.guide-info p:last-child { margin-bottom: 0; }
+
+/* Meter: Bootstrap progress restyled as a tape */
+.guide-meter { align-self: center; }
+.meter-label { margin-bottom: .4rem; font-weight: 600; color: var(--amber); }
+.meter-hours { margin: .4rem 0 0; font-size: .9rem; opacity: .85; }
+.guide-row .progress {
+  --bs-progress-bg: #14060c;
+  --bs-progress-height: 14px;
+  --bs-progress-border-radius: 999px;
+  border: 1px solid var(--velvet);
+}
+.guide-row .progress-bar {
+  background: var(--c);
+  box-shadow: 0 0 12px var(--c);
+}
+
+/* Time boxes */
+.timebox { padding: 3rem 0 5rem; background: #1d0a14; }
+.time-card {
+  height: 100%;
+  padding: 1.5rem;
+  border: 2px dashed var(--velvet);
+  border-radius: 14px;
+  transition: border-color .25s;
+}
+.time-card:hover { border-color: var(--amber); }
+.time-card h3 { font-size: 1.3rem; color: var(--amber); margin-bottom: .5rem; }
+.time-card p { margin: 0; }
+
+/* ===== Series: media queries ===== */
+@media (min-width: 768px) {
+  /* Tablet: channel + info on top line, meter below */
+  .guide-row { grid-template-columns: auto 1fr; align-items: start; }
+  .guide-meter { grid-column: 1 / -1; }
+}
+@media (min-width: 992px) {
+  /* Desktop: channel | info | meter in one line */
+  .guide-row { grid-template-columns: auto 1fr 260px; align-items: center; gap: 1.75rem; }
+  .guide-meter { grid-column: auto; }
+}
+@media (max-width: 767px) {
+  .guide { padding: 2.5rem 0 3rem; }
+  .guide-info h3 { font-size: 1.3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .guide-row, .time-card { transition: none; }
+}
