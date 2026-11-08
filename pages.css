@@ -1,0 +1,48 @@
+/* Styles for the new parts of Home, Series and About (Endterm). Loaded after style.css and forms.css */
+
+/* ===== Home ===== */
+.hero-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+.btn-outline-seat {
+  padding: .8rem 2rem;
+  background: transparent;
+  color: var(--velvet);
+  border: 2px solid var(--velvet);
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background .2s, color .2s;
+}
+.btn-outline-seat:hover { background: var(--velvet); color: #fff; }
+.btn-outline-seat:focus-visible { outline: 3px solid var(--velvet); outline-offset: 3px; }
+
+.trend-tools { margin-bottom: 2rem; }
+.votes-info { margin: 0; font-weight: 600; color: var(--amber); }
+
+.vote-btn {
+  margin-top: .75rem;
+  padding: .3rem 1.2rem;
+  background: var(--ink);
+  color: var(--c);
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background .2s, color .2s;
+}
+.vote-btn:hover { background: #fff; color: var(--ink); }
+.vote-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* Section with text on the left and a form on the right (Home, Series, About) */
+.join { padding: 3.5rem 0 4.5rem; background: #1d0a14; }
+.join form .btn-seat { min-width: 160px; }
+textarea.form-control { min-height: 110px; resize: vertical; }
+
+/* ===== Series and About: search tools ===== */
+.guide .tools .form-label,
+.faq-tools .form-label { margin-bottom: .35rem; }
+.faq-tools { margin-bottom: 1rem; }
+
+@media (max-width: 767px) {
+  .join { padding: 2.5rem 0 3rem; }
+  .btn-outline-seat { padding: .8rem 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-outline-seat, .vote-btn { transition: none; }
+}

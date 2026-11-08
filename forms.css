@@ -1,0 +1,125 @@
+/* Extra styles for the Movie Picker and Catalog pages (Endterm).
+   Loaded after style.css. */
+
+/* ===== Form fields: Bootstrap controls in our colors ===== */
+.form-label { font-weight: 600; color: var(--amber); }
+.form-control,
+.form-select {
+  background-color: #2a0f1c;
+  color: var(--text);
+  border: 2px solid var(--velvet);
+  border-radius: 12px;
+  padding: .7rem 1rem;
+}
+.form-control::placeholder { color: rgba(246, 238, 240, .5); }
+.form-control:focus,
+.form-select:focus {
+  background-color: #2a0f1c;
+  color: var(--text);
+  border-color: var(--amber);
+  box-shadow: 0 0 0 .25rem rgba(255, 185, 56, .35);
+}
+.form-select { --bs-form-select-bg-img: none; background-image: linear-gradient(45deg, transparent 50%, var(--amber) 50%), linear-gradient(135deg, var(--amber) 50%, transparent 50%); background-position: calc(100% - 20px) 50%, calc(100% - 14px) 50%; background-size: 6px 6px; background-repeat: no-repeat; }
+.form-select option { background: #2a0f1c; color: var(--text); }
+input[type="date"] { color-scheme: dark; }
+
+/* Error state: coral instead of Bootstrap red */
+.form-control.is-invalid,
+.form-select.is-invalid { border-color: #ff7a6b; background-image: none; }
+.form-select.is-invalid { background-image: linear-gradient(45deg, transparent 50%, var(--amber) 50%), linear-gradient(135deg, var(--amber) 50%, transparent 50%); }
+.invalid-feedback,
+.field-error { color: #ff9a8d; font-weight: 600; }
+.field-error { margin-bottom: 1rem; }
+
+/* ===== Booking ===== */
+.booking { padding: 3.5rem 0 4rem; background: #1d0a14; }
+.booking-form { padding: 1.5rem; background: #2a0f1c; border: 2px solid var(--velvet); border-radius: 14px; }
+.total-line { margin: 1.5rem 0 1rem; font-size: 1.2rem; }
+.total-line strong { color: var(--amber); font-family: var(--font-title); font-weight: 400; font-size: 1.5rem; }
+
+.success-box { margin-top: 1.5rem; padding: 1.25rem 1.5rem; background: var(--teal, #4fd1c5); color: var(--ink); border-radius: 14px; }
+.success-title { margin: 0 0 .25rem; font-family: var(--font-title); font-size: 1.4rem; }
+.success-box p:last-child { margin: 0; }
+
+/* ===== Catalog tools ===== */
+.tools { margin-bottom: 1.5rem; }
+.watch-panel { margin-bottom: 1.5rem; padding: 1.25rem 1.5rem; background: #2a0f1c; border: 2px dashed var(--amber); border-radius: 14px; }
+.watch-panel h3 { font-size: 1.3rem; color: var(--amber); }
+.watch-panel ul { margin: 0 0 .75rem; padding-left: 1.2rem; }
+.watch-total { margin: 0; font-weight: 600; color: var(--amber); }
+.movie-count { margin-bottom: 1.5rem; opacity: .8; }
+.no-results { padding: 2.5rem 1.5rem; text-align: center; border: 3px dashed var(--velvet); border-radius: 14px; }
+
+/* Watchlist button on a poster */
+.watch-btn {
+  margin-top: .75rem;
+  background: transparent;
+  color: var(--c);
+  border: 2px solid var(--c);
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background .2s, color .2s;
+}
+.watch-btn:hover { background: var(--c); color: var(--ink); }
+.watch-btn.saved { background: var(--c); color: var(--ink); }
+
+/* Keyboard focus for the new fields and buttons */
+.watch-btn:focus-visible,
+.btn-seat:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+@media (max-width: 767px) {
+  .booking { padding: 2.5rem 0 3rem; }
+  .booking-form { padding: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .watch-btn { transition: none; }
+}
+
+/* ===== Real movie posters in the catalog ===== */
+.poster-art.has-poster {
+  aspect-ratio: 2 / 3;
+  min-height: 0;
+  padding: 0;
+  background: #000;
+  overflow: hidden;
+}
+.poster-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s;
+}
+.poster:hover .poster-img { transform: scale(1.05); }
+/* The year becomes a small label on the poster */
+.has-poster .poster-year {
+  position: relative;
+  z-index: 1;
+  margin: .75rem;
+  padding: .15rem .8rem;
+  background: rgba(20, 6, 12, .85);
+  color: var(--c);
+  border-radius: 999px;
+  font-size: 1rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .poster-img { transition: none; }
+}
+
+/* ===== Browser autofill: keep our dark colors (Chrome paints autofilled fields light blue) ===== */
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--text);
+  caret-color: var(--text);
+  -webkit-box-shadow: 0 0 0 1000px #2a0f1c inset;
+  box-shadow: 0 0 0 1000px #2a0f1c inset;
+  transition: background-color 9999s ease-out 0s;
+}
+.form-control:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text);
+  caret-color: var(--text);
+  -webkit-box-shadow: 0 0 0 1000px #2a0f1c inset, 0 0 0 .25rem rgba(255, 185, 56, .35);
+  box-shadow: 0 0 0 1000px #2a0f1c inset, 0 0 0 .25rem rgba(255, 185, 56, .35);
+}
