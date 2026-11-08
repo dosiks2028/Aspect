@@ -89,14 +89,23 @@ h2 { font-size: 2.2rem; margin-bottom: .5rem; }
 .hero-text { font-size: 1.2rem; max-width: 40ch; margin: 0 auto 1.75rem; }
 
 .btn-seat {
-  background: var(--velvet);
-  color: #fff;
+  background-color: var(--velvet) !important;
+  color: #ffffff !important;
   font-weight: 600;
-  padding: .8rem 2rem;
-  border-radius: 999px;
-  transition: background .2s;
+  padding: .8rem 2rem !important;
+  border-radius: 999px !important;
+  border: 2px solid transparent !important;
+  transition: background-color .2s, border-color .2s, color .2s, transform .2s;
 }
-.btn-seat:hover { background: var(--ink); color: var(--amber); }
+
+.btn-seat:hover,
+.btn-seat:focus {
+  background-color: var(--velvet-dark) !important;
+  color: var(--amber) !important;
+  border-color: var(--amber) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 185, 56, 0.25);
+}
 
 /* Row of seats: Flexbox */
 .seats {
@@ -118,12 +127,13 @@ h2 { font-size: 2.2rem; margin-bottom: .5rem; }
 }
 
 /* ===== Ticket cards ===== */
+/* ===== Ticket cards ===== */
 .trends { padding: 4rem 0 5rem; }
 
 .ticket {
   position: relative;
-  background: var(--c);
   color: var(--ink);
+  background: rgba(10, 3, 7, 0.75); /* Тёмная пустота/ниша под оторванным билетом */
   border-radius: 14px;
   transition: transform .3s;
 }
@@ -132,12 +142,18 @@ h2 { font-size: 2.2rem; margin-bottom: .5rem; }
 .t-violet  { --c: #b79cff; }
 .t-mustard { --c: #ffcf5c; }
 
-.ticket-main { position: relative; padding: 1.5rem 1.5rem 1.75rem; min-height: 200px; }
+.ticket-main { 
+  position: relative; 
+  padding: 1.5rem 1.5rem 1.75rem; 
+  min-height: 200px; 
+  background: var(--c); 
+  border-radius: 14px 14px 0 0;
+}
 .ticket h3 { font-size: 1.5rem; margin-bottom: .25rem; }
 .genre { font-weight: 600; margin-bottom: .75rem; }
 .ticket-main p:last-child { margin-bottom: 0; }
 
-/* Round notches on both sides of the tear line */
+/* Круглые вырезы по бокам линии отрыва */
 .ticket-main::before,
 .ticket-main::after {
   content: "";
@@ -152,18 +168,27 @@ h2 { font-size: 2.2rem; margin-bottom: .5rem; }
 .ticket-main::before { left: -13px; }
 .ticket-main::after  { right: -13px; }
 
-/* Stub that tears off on hover */
+/* Корешок билета */
 .ticket-stub {
   padding: .9rem 1.5rem;
   border-top: 2px dashed var(--ink);
   font-weight: 600;
   background: var(--c);
   border-radius: 0 0 14px 14px;
+  /* Точка вращения в самом верхнем левом углу */
   transform-origin: left top;
-  transition: transform .35s;
+  transition: transform .35s ease-out, box-shadow .35s ease;
 }
-.ticket:hover { transform: translateY(-5px); }
-.ticket:hover .ticket-stub { transform: rotate(8deg) translate(10px, 8px); }
+
+.ticket:hover { 
+  transform: translateY(-4px); 
+}
+
+/* Левый край остаётся прикреплённым, правый отгибается вниз */
+.ticket:hover .ticket-stub { 
+  transform: rotate(5deg); 
+  box-shadow: -4px 8px 16px rgba(0, 0, 0, 0.5);
+}
 
 /* ===== Footer ===== */
 .site-footer { background: var(--velvet-dark); padding: 1.5rem 0; text-align: center; }
@@ -404,6 +429,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline
 /* =========================================================
    PAGE 2: MOVIE PICKER
    ========================================================= */
+/* =========================================================
+   PAGE 2: MOVIE PICKER
+   ========================================================= */
 .picker { padding: 3.5rem 0 4rem; }
 
 /* Form */
@@ -423,24 +451,47 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline
   gap: .75rem;
 }
 
-/* Bootstrap .btn-check + .btn restyled as seat-like buttons */
+/* Кнопки-кресла с принудительным перекрытием стилей Bootstrap (!important) */
 .mood-btn {
-  padding: .9rem 1rem;
-  background: #2a0f1c;
-  color: var(--text);
-  border: 2px solid var(--velvet);
+  padding: .9rem 1rem !important;
+  background-color: #2a0f1c !important;
+  color: var(--text) !important;
+  border: 2px solid var(--velvet) !important;
   border-radius: 12px;
   font-weight: 600;
-  transition: transform .2s, border-color .2s, background .2s;
+  transition: transform .2s, border-color .2s, background-color .2s, color .2s;
 }
-.mood-btn:hover { color: var(--amber); border-color: var(--amber); transform: translateY(-3px); }
+
+/* Состояние при наведении и фокусе */
+.mood-btn:hover,
+.btn-check:hover + .mood-btn,
+.btn-check:focus + .mood-btn {
+  background-color: var(--velvet-dark) !important;
+  color: var(--amber) !important;
+  border-color: var(--amber) !important;
+  transform: translateY(-3px);
+}
+
+/* Выбранная кнопка (Radio Checked) */
 .btn-check:checked + .mood-btn {
-  background: var(--amber);
-  color: var(--ink);
-  border-color: var(--amber);
+  background-color: var(--amber) !important;
+  color: var(--ink) !important;
+  border-color: var(--amber) !important;
   box-shadow: 0 0 24px rgba(255, 185, 56, .55);
 }
-.btn-check:focus-visible + .mood-btn { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+/* Выбранная кнопка при наведении */
+.btn-check:checked:hover + .mood-btn,
+.btn-check:checked + .mood-btn:hover {
+  background-color: #ffc55a !important;
+  color: var(--ink) !important;
+  border-color: var(--amber) !important;
+}
+
+.btn-check:focus-visible + .mood-btn { 
+  outline: 3px solid var(--amber) !important; 
+  outline-offset: 3px; 
+}
 
 /* Ticket result */
 #result { max-width: 460px; margin: 0 auto; }
@@ -452,7 +503,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline
 }
 .ticket-empty-title { font-family: var(--font-title); font-size: 1.5rem; color: var(--amber); margin-bottom: .5rem; }
 .ticket-empty p:last-child { margin-bottom: 0; }
-/* The printed ticket slides in */
 #result .ticket { animation: print-ticket .5s ease-out; }
 @keyframes print-ticket {
   from { transform: translateY(-30px); opacity: 0; }

@@ -11,6 +11,8 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
 
@@ -24,10 +26,10 @@
         </button>
         <div class="collapse navbar-collapse" id="menu">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="picker.html">Movie Picker</a></li>
-            <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
-            <li class="nav-item"><a class="nav-link" href="series.html">Series</a></li>
+            <li class="nav-item"><a class="nav-link " href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link " href="picker.html">Movie Picker</a></li>
+            <li class="nav-item"><a class="nav-link " href="catalog.html">Catalog</a></li>
+            <li class="nav-item"><a class="nav-link " href="series.html">Series</a></li>
             <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
           </ul>
         </div>
@@ -44,7 +46,6 @@
       </div>
     </section>
 
-    <!-- Story: text + three facts (Grid) -->
     <section class="story">
       <div class="container">
         <div class="row g-5 align-items-center">
@@ -64,33 +65,31 @@
       </div>
     </section>
 
-    <!-- Cast & Crew: team members -->
     <section class="cast-section">
       <div class="container">
         <h2>Cast &amp; Crew</h2>
-        <p class="section-text">The people who built this website, and what each of them did.</p>
+        <p class="section-text">One person built this website, so the crew is small and plays three roles.</p>
 
         <div class="cast-grid">
           <article class="cast t-coral">
             <p class="cast-role">Director</p>
-            <h3>Meiram Dosym</h3>
-            <p>Page 1: Home (cinema hall hero, ticket cards) and Page 5: About.</p>
+            <h3>Sansyzbay Dosymzhan</h3>
+            <p>Home page: the cinema hall, trending tickets and the club form.</p>
           </article>
           <article class="cast t-teal">
             <p class="cast-role">Producer</p>
             <h3>Sansyzbay Dosymzhan</h3>
-            <p>Page 2: Movie Picker (form and table) and Page 3: Catalog.</p>
+            <p>Movie Picker and Catalog: the booking form, search and watchlist.</p>
           </article>
           <article class="cast t-violet">
             <p class="cast-role">Editor</p>
-            <h3>Yerkebay Nurtas</h3>
-            <p>Page 4: Series.</p>
+            <h3>Sansyzbay Dosymzhan</h3>
+            <p>Series and About: the TV guide, the FAQ and the feedback form.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Rolling credits -->
     <section class="roll-section">
       <div class="container">
         <h2>The End</h2>
@@ -99,11 +98,11 @@
             <p class="roll-small">A Web Technologies 1 production</p>
             <p class="roll-big">ROW FIVE</p>
             <p class="roll-small">Directed by</p>
-            <p>Meiram Dosym</p>
+            <p>Sansyzbay Dosymzhan</p>
             <p class="roll-small">Produced by</p>
             <p>Sansyzbay Dosymzhan</p>
             <p class="roll-small">Edited by</p>
-            <p>Yerkebay Nurtas</p>
+            <p>Sansyzbay Dosymzhan</p>
             <p class="roll-small">No popcorn was harmed</p>
             <p class="roll-big">THANK YOU</p>
           </div>
@@ -111,57 +110,100 @@
       </div>
     </section>
 
-    <!-- FAQ: Bootstrap accordion -->
+    <!-- FAQ: questions are made from an array, accordion works with jQuery -->
     <section class="faq">
       <div class="container">
         <h2>Questions &amp; answers</h2>
-        <div class="accordion faq-accordion" id="faq">
 
-          <div class="accordion-item">
-            <h3 class="accordion-header">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1" aria-expanded="true" aria-controls="q1">
-                Where can I watch these movies?
-              </button>
-            </h3>
-            <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faq">
-              <div class="accordion-body">We do not stream anything. Row Five only helps you choose. Then you open your favorite service and press play.</div>
+        <div class="row g-3 align-items-end faq-tools">
+          <div class="col-12 col-md-6">
+            <label for="faq-search" class="form-label">Search the questions</label>
+            <input type="search" class="form-control" id="faq-search" placeholder="Try: seat">
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="faq-category" class="form-label">Topic</label>
+            <select class="form-select" id="faq-category">
+              <option value="all">All topics</option>
+              <option value="Movies">Movies</option>
+              <option value="Club">Club</option>
+              <option value="Website">Website</option>
+            </select>
+          </div>
+        </div>
+        <p class="movie-count" id="faq-count" aria-live="polite"></p>
+
+        <div class="accordion faq-accordion" id="faq"></div>
+        <div id="faq-empty" class="no-results d-none">
+          <p class="ticket-empty-title">Nothing found</p>
+          <p>No question matches your search. Try another word or write to us below.</p>
+        </div>
+        <p class="mt-4"><a class="btn btn-seat" href="#feedback" id="to-feedback">Write to the crew</a></p>
+      </div>
+    </section>
+
+    <!-- Feedback form: 5 fields -->
+    <section class="join" id="feedback">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <div class="col-12 col-lg-5">
+            <h2>Write to the crew</h2>
+            <p>A movie to suggest, a bug to report or just a hello. We read every message.</p>
+          </div>
+          <div class="col-12 col-lg-7">
+            <form id="feedback-form" class="booking-form" novalidate>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label for="f-name" class="form-label">Full name</label>
+                  <input type="text" class="form-control" id="f-name" autocomplete="name">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="f-email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="f-email" placeholder="name@mail.com" autocomplete="email">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="f-topic" class="form-label">Topic</label>
+                  <select class="form-select" id="f-topic">
+                    <option value="">Choose a topic</option>
+                    <option>Movie suggestion</option>
+                    <option>Website bug</option>
+                    <option>Just hello</option>
+                  </select>
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="f-rating" class="form-label">Rate the website (1 to 5)</label>
+                  <input type="number" class="form-control" id="f-rating">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12">
+                  <label for="f-message" class="form-label">Message</label>
+                  <textarea class="form-control" id="f-message" rows="3"></textarea>
+                  <div class="invalid-feedback"></div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-seat mt-4">Send</button>
+            </form>
+            <div id="feedback-success" class="success-box" role="status" style="display: none;">
+              <p class="success-title">Message sent!</p>
+              <p id="feedback-text"></p>
             </div>
           </div>
-
-          <div class="accordion-item">
-            <h3 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2" aria-expanded="false" aria-controls="q2">
-                How do you choose the movies?
-              </button>
-            </h3>
-            <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faq">
-              <div class="accordion-body">We picked them by hand. For every mood we chose one short and one long movie that we would happily watch again.</div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <h3 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3" aria-expanded="false" aria-controls="q3">
-                Is this a real company?
-              </button>
-            </h3>
-            <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faq">
-              <div class="accordion-body">No, it is a student project made for the Web Technologies 1 course.</div>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
 
-    <!-- Sources -->
     <section class="sources">
       <div class="container">
         <h2>Credits</h2>
         <ul class="sources-list">
           <li><strong>Fonts:</strong> Bowlby One and Outfit, Google Fonts.</li>
-          <li><strong>Framework:</strong> Bootstrap 5.3 (grid, navbar, table, accordion).</li>
-          <li><strong>Everything else:</strong> illustrations are pure CSS, made by our team.</li>
+          <li><strong>Framework:</strong> Bootstrap 5.3 (grid, navbar, forms, table).</li>
+          <li><strong>Library:</strong> jQuery 3.7.1 (accordion, scroll and fade effects).</li>
+          <li><strong>Movie posters:</strong> images belong to their studios and distributors. Source: Wikipedia and TMDB. Used here only for study.</li>
+          <li><strong>AI help:</strong> Claude by Anthropic helped to write parts of the code and the text. The author checked and understands them.</li>
+          <li><strong>Everything else:</strong> illustrations are pure CSS, made by the author.</li>
         </ul>
       </div>
     </section>
@@ -169,10 +211,13 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>Row Five. Student project, Midterm, Web Technologies 1.</p>
+      <p>Row Five. Student project, Web Technologies 1.</p>
     </div>
   </footer>
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/forms.js"></script>
+  <script src="js/about.js"></script>
 </body>
 </html>

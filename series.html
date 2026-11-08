@@ -11,6 +11,8 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
 
@@ -24,11 +26,11 @@
         </button>
         <div class="collapse navbar-collapse" id="menu">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="picker.html">Movie Picker</a></li>
-            <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
+            <li class="nav-item"><a class="nav-link " href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link " href="picker.html">Movie Picker</a></li>
+            <li class="nav-item"><a class="nav-link " href="catalog.html">Catalog</a></li>
             <li class="nav-item"><a class="nav-link active" href="series.html">Series</a></li>
-            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link " href="about.html">About</a></li>
           </ul>
         </div>
       </div>
@@ -40,119 +42,54 @@
       <div class="container">
         <p class="eyebrow">Tonight on Row Five TV</p>
         <h1>Series</h1>
-        <p class="page-lead">Six series, one TV guide. Every bar shows how long the series takes, so you know what you sign up for.</p>
+        <p class="page-lead">Eight series, one TV guide. Every bar shows how long the series takes, so you know what you sign up for.</p>
+        <a class="btn btn-seat" href="#suggest" id="to-suggest">Suggest a series</a>
       </div>
     </section>
 
-    <!-- TV guide: one row per series -->
+    <!-- TV guide: rows are made from an array -->
     <section class="guide">
       <div class="container">
         <h2>The TV guide</h2>
-        <p class="section-text">From a short weekend to a long winter. The bar counts total watching time, and we count two hours per evening.</p>
+        <p class="section-text">The bar counts total watching time. Change the hours per evening and the number of evenings updates.</p>
 
-        <div class="guide-list">
+        <div class="row g-3 align-items-start tools">
+          <div class="col-12 col-md-5">
+            <label for="s-search" class="form-label">Search by title or genre</label>
+            <input type="search" class="form-control" id="s-search" placeholder="Try: crime">
+          </div>
+          <div class="col-6 col-md-3">
+            <label for="s-sort" class="form-label">Sort by</label>
+            <select class="form-select" id="s-sort">
+              <option value="title">Title (A to Z)</option>
+              <option value="hours">Total hours</option>
+              <option value="episodes">Episodes</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-4">
+            <label for="s-hours" class="form-label">Hours per evening</label>
+            <input type="number" class="form-control" id="s-hours" value="2" step="0.5">
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
 
-          <article class="guide-row t-teal">
-            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">01</span></div>
-            <div class="guide-info">
-              <h3>Fleabag</h3>
-              <p class="guide-meta">Comedy-drama · 2 seasons · 12 episodes</p>
-              <p>Sharp, funny and suddenly sad. Short episodes, big feelings.</p>
-            </div>
-            <div class="guide-meter">
-              <p class="meter-label">About 3 evenings</p>
-              <div class="progress" role="progressbar" aria-label="Fleabag: about 5 hours of 75" aria-valuenow="5" aria-valuemin="0" aria-valuemax="75">
-                <div class="progress-bar" style="width: 7%"></div>
-              </div>
-              <p class="meter-hours">About 5 hours in total</p>
-            </div>
-          </article>
+        <div class="filters" role="group" aria-label="Filter series by length">
+          <button type="button" class="btn filter-btn active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="btn filter-btn" data-filter="short" aria-pressed="false">Short (up to 10 h)</button>
+          <button type="button" class="btn filter-btn" data-filter="medium" aria-pressed="false">Medium (10 to 40 h)</button>
+          <button type="button" class="btn filter-btn" data-filter="long" aria-pressed="false">Long (over 40 h)</button>
+        </div>
+        <p class="movie-count" id="s-count" aria-live="polite"></p>
 
-          <article class="guide-row t-coral">
-            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">02</span></div>
-            <div class="guide-info">
-              <h3>Chernobyl</h3>
-              <p class="guide-meta">Drama · 1 season · 5 episodes</p>
-              <p>The 1986 disaster, told hour by hour. Heavy, but hard to stop.</p>
-            </div>
-            <div class="guide-meter">
-              <p class="meter-label">About 3 evenings</p>
-              <div class="progress" role="progressbar" aria-label="Chernobyl: about 5.5 hours of 75" aria-valuenow="5.5" aria-valuemin="0" aria-valuemax="75">
-                <div class="progress-bar" style="width: 8%"></div>
-              </div>
-              <p class="meter-hours">About 5.5 hours in total</p>
-            </div>
-          </article>
+        <div class="guide-list" id="guide-list"></div>
 
-          <article class="guide-row t-violet">
-            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">03</span></div>
-            <div class="guide-info">
-              <h3>The Queen's Gambit</h3>
-              <p class="guide-meta">Drama · 1 season · 7 episodes</p>
-              <p>A girl, a chessboard and a very stylish 1960s. You do not need to know chess.</p>
-            </div>
-            <div class="guide-meter">
-              <p class="meter-label">About 4 evenings</p>
-              <div class="progress" role="progressbar" aria-label="The Queen's Gambit: about 6.5 hours of 75" aria-valuenow="6.5" aria-valuemin="0" aria-valuemax="75">
-                <div class="progress-bar" style="width: 9%"></div>
-              </div>
-              <p class="meter-hours">About 6.5 hours in total</p>
-            </div>
-          </article>
-
-          <article class="guide-row t-mustard">
-            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">04</span></div>
-            <div class="guide-info">
-              <h3>Sherlock</h3>
-              <p class="guide-meta">Crime · 4 seasons · 13 episodes</p>
-              <p>Modern London, old Baker Street. Each episode is a full-length movie.</p>
-            </div>
-            <div class="guide-meter">
-              <p class="meter-label">About 10 evenings</p>
-              <div class="progress" role="progressbar" aria-label="Sherlock: about 20 hours of 75" aria-valuenow="20" aria-valuemin="0" aria-valuemax="75">
-                <div class="progress-bar" style="width: 27%"></div>
-              </div>
-              <p class="meter-hours">About 20 hours in total</p>
-            </div>
-          </article>
-
-          <article class="guide-row t-coral">
-            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">05</span></div>
-            <div class="guide-info">
-              <h3>Breaking Bad</h3>
-              <p class="guide-meta">Crime drama · 5 seasons · 62 episodes</p>
-              <p>A chemistry teacher makes one bad choice, then many more.</p>
-            </div>
-            <div class="guide-meter">
-              <p class="meter-label">About 25 evenings</p>
-              <div class="progress" role="progressbar" aria-label="Breaking Bad: about 49 hours of 75" aria-valuenow="49" aria-valuemin="0" aria-valuemax="75">
-                <div class="progress-bar" style="width: 65%"></div>
-              </div>
-              <p class="meter-hours">About 49 hours in total</p>
-            </div>
-          </article>
-
-          <article class="guide-row t-teal">
-            <div class="guide-ch"><span class="ch-label">CH</span><span class="ch-num">06</span></div>
-            <div class="guide-info">
-              <h3>The Office (US)</h3>
-              <p class="guide-meta">Comedy · 9 seasons · 201 episodes</p>
-              <p>Paper, desks and awkward silence. A comfort show you can start anywhere.</p>
-            </div>
-            <div class="guide-meter">
-              <p class="meter-label">About 37 evenings</p>
-              <div class="progress" role="progressbar" aria-label="The Office: about 73 hours of 75" aria-valuenow="73" aria-valuemin="0" aria-valuemax="75">
-                <div class="progress-bar" style="width: 97%"></div>
-              </div>
-              <p class="meter-hours">About 73 hours in total</p>
-            </div>
-          </article>
-
+        <div id="s-empty" class="no-results d-none">
+          <p class="ticket-empty-title">Nothing found</p>
+          <p>No series matches your search. Try another word or choose "All".</p>
         </div>
       </div>
     </section>
 
-    <!-- Pick by free time -->
     <section class="timebox">
       <div class="container">
         <h2>How much time do you have?</h2>
@@ -166,7 +103,7 @@
           <div class="col-12 col-md-4">
             <div class="time-card">
               <h3>Two weeks</h3>
-              <p>Sherlock. One long episode every evening and a mystery to solve each time.</p>
+              <p>Sherlock or Dark. One long episode every evening and a mystery to solve each time.</p>
             </div>
           </div>
           <div class="col-12 col-md-4">
@@ -178,18 +115,76 @@
         </div>
       </div>
     </section>
+
+    <!-- Suggest a series: form with 6 fields -->
+    <section class="join" id="suggest">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <div class="col-12 col-lg-5">
+            <h2>Suggest a series</h2>
+            <p>Missing your favorite? Tell us the title and why it belongs in the guide.</p>
+          </div>
+          <div class="col-12 col-lg-7">
+            <form id="suggest-form" class="booking-form" novalidate>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label for="g-name" class="form-label">Full name</label>
+                  <input type="text" class="form-control" id="g-name" autocomplete="name">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="g-email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="g-email" placeholder="name@mail.com" autocomplete="email">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="g-title" class="form-label">Title of the series</label>
+                  <input type="text" class="form-control" id="g-title">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="g-genre" class="form-label">Genre</label>
+                  <select class="form-select" id="g-genre">
+                    <option value="">Choose a genre</option>
+                    <option>Comedy</option>
+                    <option>Drama</option>
+                    <option>Crime</option>
+                    <option>Sci-Fi</option>
+                  </select>
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <label for="g-seasons" class="form-label">Seasons</label>
+                  <input type="number" class="form-control" id="g-seasons">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-8">
+                  <label for="g-comment" class="form-label">Why should we add it?</label>
+                  <textarea class="form-control" id="g-comment" rows="3"></textarea>
+                  <div class="invalid-feedback"></div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-seat mt-4">Send</button>
+            </form>
+            <div id="suggest-success" class="success-box" role="status" style="display: none;">
+              <p class="success-title">Message sent!</p>
+              <p id="suggest-text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>Row Five. Student project, Midterm, Web Technologies 1.</p>
+      <p>Row Five. Student project, Web Technologies 1.</p>
     </div>
   </footer>
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/forms.js"></script>
+  <script src="js/series.js"></script>
 </body>
 </html>

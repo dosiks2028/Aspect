@@ -11,6 +11,7 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/forms.css">
 </head>
 <body>
 
@@ -26,7 +27,7 @@
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
             <li class="nav-item"><a class="nav-link active" href="picker.html">Movie Picker</a></li>
-            <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
+            <li class="nav-item"><a class="nav-link " href="catalog.html">Catalog</a></li>
             <li class="nav-item"><a class="nav-link" href="series.html">Series</a></li>
             <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           </ul>
@@ -35,35 +36,33 @@
     </nav>
   </header>
 
+
   <main>
     <section class="page-head">
       <div class="container">
         <p class="eyebrow">Box office</p>
         <h1>Movie Picker</h1>
-        <p class="page-lead">Two questions, one ticket. Answer them and we hand you tonight's movie.</p>
+        <p class="page-lead">Two questions, one ticket. Then reserve your seat at our movie night.</p>
+        <a class="btn btn-seat" href="#reserve" id="to-reserve">Reserve a seat</a>
       </div>
     </section>
 
-    <!-- Form (left) and the ticket we print (right) -->
     <section class="picker">
       <div class="container">
+        <h2 class="visually-hidden">Find your movie</h2>
         <div class="row g-5 align-items-start">
 
           <div class="col-12 col-lg-6">
-            <form id="picker-form" class="picker-form">
-
+            <form id="picker-form" class="picker-form" novalidate>
               <fieldset class="q-block">
                 <legend>1. What is your mood?</legend>
                 <div class="mood-grid">
-                  <input type="radio" class="btn-check" name="mood" id="m-laugh" value="laugh" required>
+                  <input type="radio" class="btn-check" name="mood" id="m-laugh" value="laugh">
                   <label class="btn mood-btn" for="m-laugh">I want to laugh</label>
-
                   <input type="radio" class="btn-check" name="mood" id="m-thrill" value="thrill">
                   <label class="btn mood-btn" for="m-thrill">Edge of my seat</label>
-
                   <input type="radio" class="btn-check" name="mood" id="m-mind" value="mind">
                   <label class="btn mood-btn" for="m-mind">Blow my mind</label>
-
                   <input type="radio" class="btn-check" name="mood" id="m-feel" value="feel">
                   <label class="btn mood-btn" for="m-feel">I want to feel</label>
                 </div>
@@ -72,14 +71,14 @@
               <fieldset class="q-block">
                 <legend>2. How much time do you have?</legend>
                 <div class="mood-grid">
-                  <input type="radio" class="btn-check" name="length" id="l-short" value="short" required>
+                  <input type="radio" class="btn-check" name="duration" id="l-short" value="short">
                   <label class="btn mood-btn" for="l-short">Under 110 min</label>
-
-                  <input type="radio" class="btn-check" name="length" id="l-long" value="long">
+                  <input type="radio" class="btn-check" name="duration" id="l-long" value="long">
                   <label class="btn mood-btn" for="l-long">130 min or more</label>
                 </div>
               </fieldset>
 
+              <p id="picker-error" class="field-error" role="alert" hidden></p>
               <button type="submit" class="btn btn-seat">Print my ticket</button>
             </form>
           </div>
@@ -97,12 +96,67 @@
       </div>
     </section>
 
-    <!-- Table: all 8 picks -->
+    <!-- Booking form: 6 fields, checked by JavaScript -->
+    <section class="booking" id="reserve">
+      <div class="container">
+        <h2>Reserve your seat</h2>
+        <p class="section-text">Movie night every week in Row 5. One seat costs 1500 ₸.</p>
+
+        <div class="row">
+          <div class="col-12 col-lg-8">
+            <form id="booking-form" class="booking-form" novalidate>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label for="name" class="form-label">Full name</label>
+                  <input type="text" class="form-control" id="name" autocomplete="name">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="name@mail.com" autocomplete="email">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="phone" class="form-label">Phone</label>
+                  <input type="tel" class="form-control" id="phone" placeholder="+7 701 123 45 67" autocomplete="tel">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="movie" class="form-label">Movie</label>
+                  <select class="form-select" id="movie">
+                    <option value="">Choose a movie</option>
+                  </select>
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="date" class="form-label">Date</label>
+                  <input type="date" class="form-control" id="date">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label for="seats" class="form-label">Seats (1 to 6)</label>
+                  <input type="number" class="form-control" id="seats">
+                  <div class="invalid-feedback"></div>
+                </div>
+              </div>
+
+              <p class="total-line">Total: <strong id="total">0 ₸</strong></p>
+              <button type="submit" class="btn btn-seat">Reserve</button>
+            </form>
+
+            <div id="success-box" class="success-box" role="status" style="display: none;">
+              <p class="success-title">Seats reserved!</p>
+              <p id="success-text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="menu-table">
       <div class="container">
         <h2>The full programme</h2>
-        <p class="section-text">Every mood has one short and one long movie. Here is everything we can hand you.</p>
-
+        <p class="section-text">Every mood has one short and one long movie.</p>
         <div class="table-responsive">
           <table class="table programme">
             <caption>Movie picks by mood and length</caption>
@@ -113,28 +167,7 @@
                 <th scope="col">Long (130 min or more)</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">I want to laugh</th>
-                <td>The Grand Budapest Hotel, 99 min</td>
-                <td>Knives Out, 130 min</td>
-              </tr>
-              <tr>
-                <th scope="row">Edge of my seat</th>
-                <td>Whiplash, 107 min</td>
-                <td>The Dark Knight, 152 min</td>
-              </tr>
-              <tr>
-                <th scope="row">Blow my mind</th>
-                <td>Ex Machina, 108 min</td>
-                <td>Interstellar, 169 min</td>
-              </tr>
-              <tr>
-                <th scope="row">I want to feel</th>
-                <td>Coco, 105 min</td>
-                <td>Forrest Gump, 142 min</td>
-              </tr>
-            </tbody>
+            <tbody id="programme-body"></tbody>
           </table>
         </div>
       </div>
@@ -143,52 +176,13 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>Row Five. Student project, Midterm, Web Technologies 1.</p>
+      <p>Row Five. Student project, Web Technologies 1.</p>
     </div>
   </footer>
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // All 8 picks: mood -> length -> movie
-    const picks = {
-      laugh: {
-        short: { title: "The Grand Budapest Hotel", genre: "Comedy", time: 99,  color: "t-mustard", text: "A hotel, a thief and a lot of pastel. Light and very funny." },
-        long:  { title: "Knives Out",               genre: "Mystery", time: 130, color: "t-mustard", text: "A family, a mystery and a detective who loves a good puzzle." }
-      },
-      thrill: {
-        short: { title: "Whiplash",       genre: "Drama",  time: 107, color: "t-coral", text: "A young drummer and a teacher who never says good enough." },
-        long:  { title: "The Dark Knight", genre: "Action", time: 152, color: "t-coral", text: "Batman against the Joker. Hold on to your popcorn." }
-      },
-      mind: {
-        short: { title: "Ex Machina",   genre: "Sci-Fi", time: 108, color: "t-violet", text: "One house, three people and a very clever machine." },
-        long:  { title: "Interstellar", genre: "Sci-Fi", time: 169, color: "t-violet", text: "For the night you want to look at the stars." }
-      },
-      feel: {
-        short: { title: "Coco",         genre: "Animation", time: 105, color: "t-teal", text: "Music, family and a night where you will need a tissue." },
-        long:  { title: "Forrest Gump", genre: "Drama",     time: 142, color: "t-teal", text: "One simple man walks through fifty years of history." }
-      }
-    };
-
-    const form = document.getElementById("picker-form");
-    const result = document.getElementById("result");
-
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();                       // stay on the page
-
-      const mood = form.elements["mood"].value;     // laugh, thrill, mind or feel
-      const length = form.elements["length"].value; // short or long
-      const m = picks[mood][length];
-
-      result.innerHTML =
-        '<article class="ticket ' + m.color + '">' +
-          '<div class="ticket-main">' +
-            '<h3>' + m.title + '</h3>' +
-            '<p class="genre">' + m.genre + '</p>' +
-            '<p>' + m.text + '</p>' +
-          '</div>' +
-          '<div class="ticket-stub">Row 5 · ' + m.time + ' min</div>' +
-        '</article>';
-    });
-  </script>
+  <script src="js/movies.js"></script>
+  <script src="js/picker.js"></script>
 </body>
 </html>
