@@ -235,6 +235,11 @@ input[type="date"] {
   color: var(--text);
 }
 
+[data-theme="light"] .programme thead th,
+[data-theme="light"] .programme caption {
+  background-color: #e5d6cf;
+}
+
 /* FAQ */
 
 [data-theme="light"] .faq-accordion {
