@@ -71,6 +71,16 @@ button:focus-visible,
   filter: none;
 }
 
+[data-theme="light"] .site-nav .nav-link.active,
+[data-theme="light"] .site-nav .nav-link[aria-current="page"] {
+  color: var(--velvet) !important;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--amber);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .45em;
+}
+
 /* Фоны страниц */
 
 [data-theme="light"] .hero,
