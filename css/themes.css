@@ -75,11 +75,10 @@ button:focus-visible,
 
 [data-theme="light"] .hero,
 [data-theme="light"] .page-head {
-  background: radial-gradient(
-    ellipse at top,
-    var(--section-bg),
-    var(--night) 75%
-  );
+  background:
+    radial-gradient(ellipse at 14% 0%, rgba(220, 157, 63, .19), transparent 38%),
+    radial-gradient(ellipse at 88% 12%, rgba(126, 47, 72, .13), transparent 42%),
+    linear-gradient(145deg, #fffaf3 0%, var(--section-bg) 52%, var(--night) 100%);
 }
 
 [data-theme="light"] .cast-section {
@@ -100,6 +99,15 @@ button:focus-visible,
 [data-theme="light"] .booking-form,
 [data-theme="light"] .watch-panel {
   background: var(--surface);
+}
+
+/* Keep ticket cut-outs and picker form aligned with the light page canvas. */
+[data-theme="light"] .ticket {
+  background: var(--night);
+}
+
+[data-theme="light"] .picker-form {
+  background: transparent !important;
 }
 
 /* Поля форм */

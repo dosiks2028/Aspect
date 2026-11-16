@@ -852,7 +852,6 @@ html, body {
 
 /* Карточки, формы, таблицы и аккордеоны в светлой теме */
 [data-theme="light"] .form-card,
-[data-theme="light"] form,
 [data-theme="light"] .stat-box,
 [data-theme="light"] .accordion-item,
 [data-theme="light"] .accordion-button,

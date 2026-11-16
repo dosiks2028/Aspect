@@ -180,6 +180,36 @@
       });
   }
 
+  function setupLoginForm(form) {
+    if (!form) return;
+
+    const emailField = form.querySelector('input[type="email"]');
+    const passwordField = form.querySelector('input[type="password"]');
+
+    setupForm(form, function (field) {
+      const email = emailField.value.trim();
+      const password = passwordField.value;
+
+      if (field === emailField && !isEmailValid(email)) {
+        return "Enter a correct email.";
+      }
+
+      if (field === passwordField) {
+        if (!password) return "Enter your demo password.";
+        if (!RowFive.credentials(email, password)) {
+          return "Incorrect email or password.";
+        }
+      }
+
+      return "";
+    }, function () {
+      const email = emailField.value.trim();
+      if (!RowFive.login(email)) return false;
+
+      if (form.id === "login") window.location.href = "profile.html";
+    });
+  }
+
   // Add the demo note and login form on Home
   const joinForm = document.getElementById("join-form");
 
@@ -230,37 +260,10 @@
       `
     );
 
-    setupForm(
-      document.getElementById("login"),
-
-      function (field) {
-        const email = document.getElementById("login-email").value.trim();
-        const password = document.getElementById("login-password").value;
-
-        if (field.id === "login-email" && !isEmailValid(email)) {
-          return "Enter a correct email.";
-        }
-
-        if (field.id === "login-password") {
-          if (!password) return "Enter your demo password.";
-
-          if (!RowFive.credentials(email, password)) {
-            return "Incorrect email or password.";
-          }
-        }
-
-        return "";
-      },
-
-      function () {
-        const email = document.getElementById("login-email").value.trim();
-
-        if (!RowFive.login(email)) return false;
-
-        window.location.href = "profile.html";
-      }
-    );
+    setupLoginForm(document.getElementById("login"));
   }
+
+  setupLoginForm(document.getElementById("profile-login"));
 
   function render() {
     const account = user();
@@ -283,11 +286,14 @@
     const details = document.getElementById("profile-details");
     if (!details) return;
 
+    const loginPanel = document.getElementById("profile-login-panel");
+    if (loginPanel) loginPanel.hidden = !!account;
+
     details.textContent = account
       ? "Welcome, " + account.name +
         "! Email: " + account.email +
         ". Favorite mood: " + account.mood + "."
-      : "You are browsing as a guest. Log in on Home to see your profile.";
+      : "You are browsing as a guest. Log in to see your profile and saved list.";
 
     const list = document.getElementById("saved-items");
     const saved = items();

@@ -136,7 +136,7 @@ function getSuggestError(field) {
 
 if (field.id === "g-name") {
     if (value === "") return "Please enter your name.";
-    if (!isNameValid(value)) return "Use at least 3 letters, no spaces or digits.";
+    if (!isNameValid(value)) return "Enter a full name with at least 3 letters. Spaces and hyphens are allowed; digits are not.";
   }
   if (field.id === "g-email") {
     if (value === "") return "Please enter your email.";
@@ -165,7 +165,7 @@ setupForm(suggestForm, getSuggestError, function () {
   const name = document.getElementById("g-name").value.trim();
   const title = document.getElementById("g-title").value.trim();
   document.getElementById("suggest-text").textContent =
-    "Thank you, " + name + "! We will watch " + title + " this week and decide if it joins the guide.";
+    "Thanks, " + name + "! Your suggestion is a demo only; it is not sent or saved.";
   $("#suggest-success").stop(true, true).hide().fadeIn(500); // jQuery effect: success message
 });
 

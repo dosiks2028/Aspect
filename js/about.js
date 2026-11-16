@@ -4,7 +4,7 @@ const faqs = [
   { id: 1, category: "Movies",  question: "Where can I watch these movies?",  answer: "We do not stream anything. Row Five only helps you choose. Then you open your favorite service and press play." },
   { id: 2, category: "Movies",  question: "How do you choose the movies?",    answer: "We picked them by hand. For every mood we chose one short and one long movie that we would happily watch again." },
   { id: 3, category: "Website", question: "Is this a real company?",          answer: "No, it is a student project made for the Web Technologies 1 course." },
-  { id: 4, category: "Movies",  question: "Can I suggest a movie?",           answer: "Yes. Use the form on this page and tell us the title. We read every message." },
+  { id: 4, category: "Movies",  question: "Can I suggest a movie?",           answer: "You can try the demo form, but it does not send or save suggestions." },
   { id: 5, category: "Club",    question: "How much is one seat?",            answer: "A seat at our movie night costs 1500 tenge. You can reserve it on the Movie Picker page." },
   { id: 6, category: "Club",    question: "Do I need to pay online?",         answer: "No. This is a student project without a backend, so the reservation form does not take any money." },
   { id: 7, category: "Website", question: "Are the series times exact?",      answer: "They are close. We count the length of all episodes and round it. We also count two hours per evening." },
@@ -79,7 +79,7 @@ function getFeedbackError(field) {
 
 if (field.id === "f-name") {
     if (value === "") return "Please enter your name.";
-    if (!isNameValid(value)) return "Use at least 3 letters, no spaces or digits.";
+    if (!isNameValid(value)) return "Enter a full name with at least 3 letters. Spaces and hyphens are allowed; digits are not.";
   }
   if (field.id === "f-email") {
     if (value === "") return "Please enter your email.";
@@ -103,7 +103,7 @@ if (field.id === "f-name") {
 setupForm(feedbackForm, getFeedbackError, function () {
   const name = document.getElementById("f-name").value.trim();
   document.getElementById("feedback-text").textContent =
-    "Thank you, " + name + "! Your message is on its way to the crew.";
+    "Thanks, " + name + "! This demo form does not send or save messages.";
   $("#feedback-success").stop(true, true).hide().fadeIn(500); // jQuery effect: success message
 });
 

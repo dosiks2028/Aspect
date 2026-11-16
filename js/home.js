@@ -83,8 +83,8 @@ function showVotesInfo() {
     if (trending[i].votes > leader.votes) leader = trending[i];
   }
   votesInfo.textContent = total === 0
-    ? "Total votes: 0. Be the first to vote!"
-    : "Total votes: " + total + ". Leader: " + leader.title + "." + (votedMovieId ? " (Click your voted button to cancel)" : "");
+    ? "Votes saved in this browser: 0. Be the first to vote!"
+    : "Votes saved in this browser: " + total + ". Leader: " + leader.title + "." + (votedMovieId ? " (Click your voted button to cancel)" : "");
 }
 
 // Click on "Vote" or "Voted ✓ (Cancel)"
@@ -157,7 +157,7 @@ function getJoinError(field) {
 
 if (field.id === "j-name") {
     if (value === "") return "Please enter your name.";
-    if (!isNameValid(value)) return "Use at least 3 letters, no spaces or digits.";
+    if (!isNameValid(value)) return "Enter a full name with at least 3 letters. Spaces and hyphens are allowed; digits are not.";
   }
   if (field.id === "j-email") {
     if (value === "") return "Please enter your email.";

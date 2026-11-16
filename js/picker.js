@@ -105,10 +105,9 @@ for (let i = 0; i < movies.length; i++) {
 function getError(field) {
   const value = field.value.trim();
 
-if (field.id === "name") {
+  if (field.id === "name") {
     if (value === "") return "Please enter your name.";
-    if (!/^[A-Za-zА-Яа-яЁё]+$/.test(value)) return "Use only letters, no spaces or digits.";
-    if (value.length < 3) return "The name must have at least 3 letters.";
+    if (!isNameValid(value)) return "Enter a full name with at least 3 letters. Spaces and hyphens are allowed; digits are not.";
   }
 
   if (field.id === "email") {
@@ -212,10 +211,8 @@ bookingForm.addEventListener("submit", function (event) {
   }
 
   document.getElementById("success-text").textContent =
-
-  document.getElementById("success-text").textContent =
     "Thank you, " + name + "! " + seatsInput.value + " seat(s) for " + movieTitle +
-    " on " + date + " are reserved. Total: " + total + " ₸.";
+    " on " + date + " are saved as a demo reservation in this browser. No payment or real booking is made. Total: " + total + " ₸.";
 
   bookingForm.reset();
   updateTotal();

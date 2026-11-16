@@ -38,7 +38,11 @@ function isEmailValid(email) {
 }
 
 function isNameValid(name) {
-  return /^[A-Za-zА-Яа-яЁё]{3,}$/.test(name);
+  const normalized = name.trim().replace(/\s+/g, " ");
+  const letters = normalized.replace(/[ '\u2019-]/g, "");
+
+  return [...letters].length >= 3 &&
+    /^\p{L}+(?:[ '\u2019-]\p{L}+)*$/u.test(normalized);
 }
 
 function setupForm(form, getError, onSuccess) {

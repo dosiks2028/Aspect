@@ -129,14 +129,14 @@
         <div class="row g-5 align-items-center">
           <div class="col-12 col-lg-5">
             <h2>Suggest a series</h2>
-            <p>Missing your favorite? Tell us the title and why it belongs in the guide.</p>
+            <p>Try the suggestion form. This demo does not send or save suggestions.</p>
           </div>
           <div class="col-12 col-lg-7">
             <form id="suggest-form" class="booking-form" novalidate>
               <div class="row g-3">
                 <div class="col-12 col-md-6">
                   <label for="g-name" class="form-label">Full name</label>
-                  <input type="text" class="form-control" id="g-name" autocomplete="name" minlength="3" pattern="[A-Za-zА-Яа-яЁё]{3,}" required>
+                  <input type="text" class="form-control" id="g-name" autocomplete="name" minlength="3" required>
                   <div class="invalid-feedback"></div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -174,7 +174,7 @@
               <button type="submit" class="btn btn-seat mt-4">Send</button>
             </form>
             <div id="suggest-success" class="success-box" role="status" style="display: none;">
-              <p class="success-title">Message sent!</p>
+              <p class="success-title">Demo response</p>
               <p id="suggest-text"></p>
             </div>
           </div>
