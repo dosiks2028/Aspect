@@ -1,0 +1,278 @@
+/* Подключается после style.css, forms.css и pages.css */
+
+:root {
+  color-scheme: dark;
+
+  --surface: #2a0f1c;
+  --section-bg: #1d0a14;
+  --muted: #c9b7bf;
+  --error: #ff9a8d;
+  --focus: #ffb938;
+  --success-bg: #4fd1c5;
+  --success-text: #1b0a12;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --night: #faf6f2;
+  --text: #1c1014;
+  --surface: #ffffff;
+  --section-bg: #efe5e0;
+  --amber: #855000;
+  --muted: #665159;
+  --error: #b32332;
+  --focus: #7d1a2c;
+  --success-bg: #d1f3e9;
+  --success-text: #123c31;
+}
+
+/* Переключатель */
+
+.theme-btn {
+  border: 2px solid currentColor;
+  color: var(--text);
+  background: transparent;
+  border-radius: 999px;
+  padding: .35rem .95rem;
+  font-weight: 600;
+}
+
+.theme-btn:hover {
+  background: var(--text);
+  color: var(--night);
+}
+
+/* Видимый фокус при работе с клавиатуры */
+
+.theme-btn:focus-visible,
+a:focus-visible,
+button:focus-visible,
+.form-control:focus-visible,
+.form-select:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* Навигация и подвал */
+
+[data-theme="light"] .site-nav,
+[data-theme="light"] .site-footer,
+[data-theme="light"] .navbar-collapse {
+  background: var(--section-bg);
+  color: var(--text);
+}
+
+[data-theme="light"] .navbar-collapse {
+  border-color: var(--muted);
+}
+
+[data-theme="light"] .navbar-toggler-icon {
+  filter: none;
+}
+
+/* Фоны страниц */
+
+[data-theme="light"] .hero,
+[data-theme="light"] .page-head {
+  background: radial-gradient(
+    ellipse at top,
+    var(--section-bg),
+    var(--night) 75%
+  );
+}
+
+[data-theme="light"] .cast-section {
+  background: var(--night);
+}
+
+[data-theme="light"] .booking,
+[data-theme="light"] .join,
+[data-theme="light"] .menu-table,
+[data-theme="light"] .faq,
+[data-theme="light"] .timebox {
+  background: var(--section-bg);
+}
+
+[data-theme="light"] .facts li,
+[data-theme="light"] .guide-row,
+[data-theme="light"] .poster,
+[data-theme="light"] .booking-form,
+[data-theme="light"] .watch-panel {
+  background: var(--surface);
+}
+
+/* Поля форм */
+
+.form-control,
+.form-select,
+.form-select option,
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--surface);
+  color: var(--text);
+}
+
+.form-control::placeholder,
+.phone-note {
+  color: var(--muted);
+}
+
+input[type="date"] {
+  color-scheme: inherit;
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+  border-color: var(--error);
+}
+
+.invalid-feedback,
+.field-error {
+  color: var(--error);
+}
+
+.success-box {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+/* Автозаполнение браузера */
+
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:active,
+.form-control:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text);
+  caret-color: var(--text);
+  -webkit-box-shadow: 0 0 0 1000px var(--surface) inset;
+  box-shadow: 0 0 0 1000px var(--surface) inset;
+}
+
+.form-control:-webkit-autofill:focus {
+  outline: 3px solid var(--focus);
+}
+
+/* Выбор настроения */
+
+[data-theme="light"] .mood-btn {
+  background-color: var(--surface) !important;
+}
+
+[data-theme="light"] .btn-check:checked + .mood-btn {
+  background-color: var(--velvet) !important;
+  color: #fff !important;
+}
+
+[data-theme="light"] .mood-btn:hover,
+[data-theme="light"] .btn-check:hover + .mood-btn,
+[data-theme="light"] .btn-check:focus + .mood-btn {
+  background-color: var(--section-bg) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="light"] .btn-check:checked + .mood-btn:hover {
+  background-color: var(--velvet-dark) !important;
+  color: #fff !important;
+}
+
+/* Кнопки и каталог */
+
+[data-theme="light"] .btn-seat:hover,
+[data-theme="light"] .btn-seat:focus {
+  color: #fff !important;
+}
+
+[data-theme="light"] .filter-btn.active {
+  color: #fff;
+}
+
+[data-theme="light"] .poster-info h3,
+[data-theme="light"] .guide-info h3 {
+  color: var(--text);
+}
+
+[data-theme="light"] .watch-btn {
+  color: var(--text);
+  border-color: var(--velvet);
+}
+
+[data-theme="light"] .watch-btn:hover,
+[data-theme="light"] .watch-btn.saved {
+  background: var(--velvet);
+  color: #fff;
+}
+
+/* Таблица программы */
+
+[data-theme="light"] .programme {
+  --bs-table-bg: var(--surface);
+  --bs-table-striped-bg: var(--surface);
+  --bs-table-hover-bg: var(--section-bg);
+  --bs-table-hover-color: var(--text);
+}
+
+[data-theme="light"] .programme thead th {
+  background: var(--section-bg);
+  color: var(--text);
+}
+
+/* FAQ */
+
+[data-theme="light"] .faq-accordion {
+  --bs-accordion-bg: var(--surface);
+  --bs-accordion-btn-bg: var(--surface);
+  --bs-accordion-active-bg: var(--section-bg);
+}
+
+[data-theme="light"] .faq-accordion .accordion-button::after {
+  filter: none;
+}
+
+/* Экран с титрами остаётся тёмным в обеих темах */
+
+.roll {
+  color: #f6eef0;
+}
+
+.roll-small {
+  color: #ffb938;
+}
+[hidden] {
+  display: none !important;
+}
+
+.site-nav .navbar-nav {
+  align-items: start;
+  gap: .25rem;
+}
+
+#profile-link {
+  max-width: 14rem;
+  overflow-wrap: anywhere;
+}
+
+.saved-list {
+  list-style: none;
+  padding: 0;
+}
+
+.saved-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--muted);
+}
+
+.saved-row span,
+#profile-details {
+  overflow-wrap: anywhere;
+}
+
+#login,
+#join {
+  scroll-margin-top: 5rem;
+}

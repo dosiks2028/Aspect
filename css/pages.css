@@ -28,6 +28,17 @@
 }
 .vote-btn:hover { background: #fff; color: var(--ink); }
 .vote-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.vote-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.vote-btn.voted:disabled {
+  opacity: 1;
+  background: #fff;
+  color: var(--ink);
+}
+
 
 /* Section with text on the left and a form on the right (Home, Series, About) */
 .join { padding: 3.5rem 0 4.5rem; background: #1d0a14; }
@@ -45,4 +56,14 @@ textarea.form-control { min-height: 110px; resize: vertical; }
 }
 @media (prefers-reduced-motion: reduce) {
   .btn-outline-seat, .vote-btn { transition: none; }
+}
+/* Credits links */
+
+.sources-list a {
+  color: var(--amber);
+  text-underline-offset: .2em;
+}
+
+.sources-list a:hover {
+  color: var(--text);
 }

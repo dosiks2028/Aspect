@@ -1,0 +1,203 @@
+/* Loaded last, after themes.css */
+
+/* ===== Flexible content ===== */
+
+html {
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 0;
+}
+
+main {
+  overflow-wrap: anywhere;
+}
+
+img {
+  max-width: 100%;
+}
+
+.row > *,
+.guide-row > *,
+.cast-grid > *,
+.saved-row > * {
+  min-width: 0;
+}
+
+.form-control,
+.form-select {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.form-select {
+  padding-right: 2.5rem;
+}
+
+.watch-btn,
+.theme-btn,
+.btn-seat {
+  white-space: normal;
+  max-width: 100%;
+}
+
+/* ===== Navigation ===== */
+
+.site-nav .navbar-collapse {
+  min-width: 0;
+}
+
+.navbar-toggler,
+.theme-btn {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* ===== Skip navigation with the keyboard ===== */
+
+.skip-link {
+  position: fixed;
+  top: .75rem;
+  left: .75rem;
+  z-index: 2000;
+  padding: .75rem 1rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--focus);
+  border-radius: 8px;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ===== Visible keyboard focus ===== */
+
+.screen {
+  --focus: #7d1a2c;
+}
+
+.ticket,
+.cast {
+  --focus: #1b0a12;
+}
+
+:is(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.btn-check:focus-visible + .mood-btn {
+  outline: 3px solid var(--focus) !important;
+  outline-offset: 3px;
+}
+
+.accordion-button:focus-visible {
+  outline-offset: -4px;
+}
+
+/* Pause the credits while they have keyboard focus */
+
+.roll:focus-within .roll-inner {
+  animation-play-state: paused;
+}
+
+/* ===== Programme table ===== */
+
+.programme {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.programme th,
+.programme td {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  vertical-align: top;
+}
+
+/* ===== Desktop ===== */
+
+@media (min-width: 992px) {
+  .site-nav .navbar-nav {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+/* ===== Collapsed navigation ===== */
+
+@media (max-width: 991.98px) {
+  .site-nav .navbar-collapse {
+    width: 100%;
+  }
+
+  .site-nav .navbar-nav {
+    align-items: stretch;
+  }
+
+  .site-nav .nav-link {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* ===== Phones ===== */
+
+@media (max-width: 767.98px) {
+  /* Large Bootstrap gutters caused horizontal overflow */
+  .row.g-5 {
+    --bs-gutter-x: 1.5rem;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 1rem;
+  }
+
+  .hero-buttons > .btn {
+    width: 100%;
+  }
+
+  .programme th,
+  .programme td {
+    padding: .65rem .5rem;
+    font-size: .9rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .catalog .tools > [class*="col-"],
+  .guide .tools > [class*="col-"] {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  .mood-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cast-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Keep cards from moving over neighbouring content on phones */
+
+@media (max-width: 767.98px), (hover: none) {
+  .ticket:hover,
+  .poster:hover,
+  .cast:hover,
+  .guide-row:hover,
+  .facts li:hover {
+    transform: none;
+  }
+
+  .ticket:hover .ticket-stub {
+    transform: none;
+  }
+}

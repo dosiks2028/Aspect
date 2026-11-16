@@ -709,3 +709,208 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline
 @media (prefers-reduced-motion: reduce) {
   .guide-row, .time-card { transition: none; }
 }
+html, body {
+  max-width: 100%;
+}
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background: #14060b;
+    padding: 1rem;
+    border-radius: 16px;
+    margin-top: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .navbar-nav .nav-link {
+    padding: 0.65rem 0.75rem;
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  section, .py-5 {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
+  }
+  h1, .display-4, .display-5 {
+    font-size: 2rem !important;
+    line-height: 1.2;
+  }
+  h2 {
+    font-size: 1.55rem !important;
+  }
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+@media (max-width: 767.98px) {
+  .form-card, form {
+    padding: 1.25rem !important;
+  }
+  .form-control, .form-select {
+    font-size: 16px !important;
+    min-height: 48px;
+    padding: 0.65rem 0.9rem;
+  }
+  form .btn[type="submit"],
+  #pick-btn {
+    width: 100%;
+    min-height: 48px;
+    font-size: 1rem;
+  }
+}
+@media (max-width: 991.98px) {
+  .ticket {
+    margin-bottom: 0.5rem;
+  }
+  .cast-card, .stat-box {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .mood-btn {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.4rem;
+  }
+  .ticket:hover .ticket-stub {
+    transform: translateY(4px) rotate(1deg);
+  }
+  .vote-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+  .table-responsive {
+    border-radius: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .table th, .table td {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+}
+/* ---------- Кнопка переключения темы ---------- */
+.theme-btn {
+  border: 1.5px solid var(--accent, #f7b844);
+  color: var(--text);
+  background: transparent;
+  border-radius: 999px;
+  padding: 0.35rem 0.95rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s, color 0.2s;
+}
+.theme-btn:hover {
+  background: var(--accent, #f7b844);
+  color: #14060b;
+}
+.theme-btn:focus-visible {
+  outline: 3px solid var(--accent, #f7b844);
+  outline-offset: 3px;
+}
+
+/* ---------- Светлая тема (Light Mode через CSS-переменные) ---------- */
+[data-theme="light"] {
+  --bg: #faf6f2;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --text: #1c1014;
+  --muted: #5c4950;
+  --border: rgba(28, 16, 20, 0.15);
+  --accent: #d9820b;
+  --ink: #1c1014;
+}
+
+[data-theme="light"] body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+[data-theme="light"] .navbar {
+  background: rgba(250, 246, 242, 0.95) !important;
+  border-bottom: 1px solid rgba(28, 16, 20, 0.1);
+}
+
+[data-theme="light"] .navbar-brand,
+[data-theme="light"] .nav-link {
+  color: var(--text) !important;
+}
+
+[data-theme="light"] .navbar-toggler {
+  border-color: rgba(28, 16, 20, 0.3);
+  filter: invert(1);
+}
+
+[data-theme="light"] .navbar-collapse {
+  background: #ffffff;
+}
+
+/* Карточки, формы, таблицы и аккордеоны в светлой теме */
+[data-theme="light"] .form-card,
+[data-theme="light"] form,
+[data-theme="light"] .stat-box,
+[data-theme="light"] .accordion-item,
+[data-theme="light"] .accordion-button,
+[data-theme="light"] .modal-content,
+[data-theme="light"] .card {
+  background-color: #ffffff !important;
+  color: #1c1014 !important;
+  border-color: rgba(28, 16, 20, 0.15) !important;
+}
+
+[data-theme="light"] .form-control,
+[data-theme="light"] .form-select {
+  background-color: #f4eee8 !important;
+  color: #1c1014 !important;
+  border-color: rgba(28, 16, 20, 0.25) !important;
+}
+
+[data-theme="light"] .form-control::placeholder {
+  color: #7a666d !important;
+}
+
+[data-theme="light"] input[type="date"] {
+  color-scheme: light;
+}
+
+[data-theme="light"] .phone-note,
+[data-theme="light"] .text-muted,
+[data-theme="light"] .text-white-50 {
+  color: #5c4950 !important;
+}
+
+[data-theme="light"] .table {
+  --bs-table-bg: #ffffff;
+  --bs-table-color: #1c1014;
+  --bs-table-border-color: rgba(28, 16, 20, 0.15);
+  color: #1c1014 !important;
+}
+
+[data-theme="light"] .mood-btn {
+  background-color: #ffffff;
+  color: #1c1014;
+  border-color: rgba(28, 16, 20, 0.25);
+}
+
+[data-theme="light"] .btn-check:checked + .mood-btn {
+  background-color: #f7b844;
+  color: #1c1014;
+  border-color: #f7b844;
+}
+
+[data-theme="light"] footer {
+  background-color: #efe7df !important;
+  color: #1c1014 !important;
+  border-top: 1px solid rgba(28, 16, 20, 0.12);
+}
+
+/* Текст внутри ярких цветных билетов остаётся тёмным и контрастным */
+[data-theme="light"] .ticket,
+[data-theme="light"] .cast-card {
+  color: #1c1014 !important;
+}

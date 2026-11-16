@@ -1,26 +1,36 @@
-// Small helpers for form validation (used by home.js, about.js, series.js)
+// Shared form validation
 
-// Show an error text under a field
 function showFieldError(field, message) {
   field.classList.add("is-invalid");
-  field.parentElement.querySelector(".invalid-feedback").textContent = message;
+  field.setAttribute("aria-invalid", "true");
+
+  const error = field.parentElement.querySelector(".invalid-feedback");
+
+  if (error) {
+    error.id = field.id + "-error";
+    error.textContent = message;
+    field.setAttribute("aria-describedby", error.id);
+  }
 }
 
-// Remove the error under a field
 function clearFieldError(field) {
   field.classList.remove("is-invalid");
-  field.parentElement.querySelector(".invalid-feedback").textContent = "";
+  field.removeAttribute("aria-invalid");
+
+  const error = field.parentElement.querySelector(".invalid-feedback");
+  if (error) error.textContent = "";
 }
 
-// Check one field with the function getError (it returns "" if the field is correct)
 function validateField(field, getError) {
   const message = getError(field);
-  if (message === "") {
-    clearFieldError(field);
-    return true;
+
+  if (message) {
+    showFieldError(field, message);
+    return false;
   }
-  showFieldError(field, message);
-  return false;
+
+  clearFieldError(field);
+  return true;
 }
 
 function isEmailValid(email) {
@@ -28,39 +38,45 @@ function isEmailValid(email) {
 }
 
 function isNameValid(name) {
-  return /^[A-Za-zА-Яа-яЁё\s'-]+$/.test(name);
+  return /^[A-Za-zА-Яа-яЁё]{3,}$/.test(name);
 }
 
-// Connect a form: check on submit, fix errors while typing,
-// call onSuccess() when all fields are correct, then clear the form
 function setupForm(form, getError, onSuccess) {
+  if (!form) return;
+
   const fields = form.querySelectorAll(".form-control, .form-select");
 
-  for (let i = 0; i < fields.length; i++) {
-    const field = fields[i];
-    const recheck = function () {
-      if (field.classList.contains("is-invalid")) validateField(field, getError);
-      $(form).next(".success-box").stop(true, true).fadeOut(200); // hide the old success message
-    };
+  function recheck() {
+    fields.forEach(function (field) {
+      if (field.classList.contains("is-invalid")) {
+        validateField(field, getError);
+      }
+    });
+
+    $(form).next(".success-box").stop(true, true).fadeOut(200);
+  }
+
+  fields.forEach(function (field) {
     field.addEventListener("input", recheck);
     field.addEventListener("change", recheck);
-  }
+  });
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-    let allCorrect = true;
-    for (let i = 0; i < fields.length; i++) {
-      if (!validateField(fields[i], getError)) allCorrect = false;
+    $(form).next(".success-box").stop(true, true).hide();
+
+    let correct = true;
+
+    fields.forEach(function (field) {
+      if (!validateField(field, getError)) correct = false;
+    });
+
+    if (!correct) {
+      form.querySelector(".is-invalid").focus();
+      return;
     }
-    if (allCorrect) {
-      onSuccess();
-      form.reset();
-    }
+
+    // Keep the entered values if saving failed
+    if (onSuccess() !== false) form.reset();
   });
 }
-
-// Hover effect for buttons (jQuery)
-$(".btn-seat").hover(
-  function () { $(this).stop(true).fadeTo(150, 0.8); },
-  function () { $(this).stop(true).fadeTo(150, 1); }
-);

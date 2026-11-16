@@ -74,10 +74,19 @@ function showSeries() {
         '</div>' +
         '<p class="meter-hours">About ' + item.hours + ' hours in total</p>' +
       '</div>';
+    const saveButton = document.createElement("button");
+    saveButton.type = "button";
+    saveButton.className = "btn theme-btn series-save";
+    saveButton.dataset.id = item.id;
+
+    row.querySelector(".guide-info").appendChild(saveButton);
     guideList.appendChild(row);
   }
 
-  countText.textContent = "Showing " + found.length + " of " + series.length + " series";
+  syncSeriesSaved();
+
+  countText.textContent =
+    "Showing " + found.length + " of " + series.length + " series";
   emptyBox.classList.toggle("d-none", found.length !== 0); // empty result
   $("#guide-list").stop(true, true).hide().fadeIn(250);   // jQuery effect
 }
@@ -113,10 +122,10 @@ hoursInput.addEventListener("input", function () {
 
 // jQuery effect: on hover the tape grows
 $("#guide-list").on("mouseenter", ".guide-row", function () {
-  $(this).find(".progress").stop(true).animate({ height: "22px" }, 200);
+  $(this).find(".progress").stop(true, true).animate({ height: "22px" }, 200);
 });
 $("#guide-list").on("mouseleave", ".guide-row", function () {
-  $(this).find(".progress").stop(true).animate({ height: "14px" }, 200);
+  $(this).find(".progress").stop(true, true).animate({ height: "14px" }, 200);
 });
 
 // ----- Suggest a series form -----
@@ -125,9 +134,9 @@ const suggestForm = document.getElementById("suggest-form");
 function getSuggestError(field) {
   const value = field.value.trim();
 
-  if (field.id === "g-name") {
+if (field.id === "g-name") {
     if (value === "") return "Please enter your name.";
-    if (value.length < 2 || !isNameValid(value)) return "Use at least 2 letters, no digits.";
+    if (!isNameValid(value)) return "Use at least 3 letters, no spaces or digits.";
   }
   if (field.id === "g-email") {
     if (value === "") return "Please enter your email.";
@@ -160,10 +169,34 @@ setupForm(suggestForm, getSuggestError, function () {
   $("#suggest-success").stop(true, true).hide().fadeIn(500); // jQuery effect: success message
 });
 
-// Smooth scroll to the form
-$("#to-suggest").on("click", function (event) {
-  event.preventDefault();
-  $("html, body").stop(true).animate({ scrollTop: $("#suggest").offset().top - 70 }, 600);
-});
+
 
 showSeries();
+function syncSeriesSaved() {
+  guideList.querySelectorAll(".series-save").forEach(function (button) {
+    const saved = RowFive.has("series-" + button.dataset.id);
+
+    button.textContent = saved ? "In my watchlist" : "Add to watchlist";
+    button.setAttribute("aria-pressed", String(saved));
+  });
+}
+
+guideList.addEventListener("click", function (event) {
+  const button = event.target.closest(".series-save");
+  if (!button) return;
+
+  const item = series.find(function (item) {
+    return item.id === Number(button.dataset.id);
+  });
+
+  if (item) {
+    RowFive.toggle({
+      key: "series-" + item.id,
+      type: "series",
+      title: item.title,
+      minutes: Math.round(item.hours * 60)
+    });
+  }
+});
+
+window.addEventListener("rowfive:change", syncSeriesSaved);

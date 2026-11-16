@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About | Row Five</title>
+  <script src="js/theme.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,31 +14,72 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="css/forms.css">
   <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header>
-    <nav class="navbar navbar-expand-md site-nav">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">Row Five</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Open menu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="menu">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link " href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link " href="picker.html">Movie Picker</a></li>
-            <li class="nav-item"><a class="nav-link " href="catalog.html">Catalog</a></li>
-            <li class="nav-item"><a class="nav-link " href="series.html">Series</a></li>
-            <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+  <nav
+    class="navbar navbar-expand-lg site-nav"
+    aria-label="Main navigation"
+  >
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Row Five</a>
 
-  <main>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menu"
+        aria-controls="menu"
+        aria-expanded="false"
+        aria-label="Open menu"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="picker.html">Movie Picker</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="catalog.html">Catalog</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="series.html">Series</a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="about.html"
+            >About</a>
+          </li>
+
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <button
+              type="button"
+              class="btn theme-btn"
+              id="theme-toggle"
+              aria-label="Switch to light theme"
+            >☀️ Light</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+  <main id="main-content" tabindex="-1">
     <section class="page-head">
       <div class="container">
         <p class="eyebrow">Behind the scenes</p>
@@ -93,7 +135,12 @@
     <section class="roll-section">
       <div class="container">
         <h2>The End</h2>
-        <div class="roll" aria-label="Rolling credits of the project">
+        <div
+          class="roll"
+          role="region"
+          tabindex="0"
+          aria-label="Rolling credits. Focus here to pause."
+        >
           <div class="roll-inner">
             <p class="roll-small">A Web Technologies 1 production</p>
             <p class="roll-big">ROW FIVE</p>
@@ -154,7 +201,7 @@
               <div class="row g-3">
                 <div class="col-12 col-md-6">
                   <label for="f-name" class="form-label">Full name</label>
-                  <input type="text" class="form-control" id="f-name" autocomplete="name">
+                  <input type="text" class="form-control" id="f-name" autocomplete="name" minlength="3" pattern="[A-Za-zА-Яа-яЁё]{3,}" required>
                   <div class="invalid-feedback"></div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -195,18 +242,64 @@
     </section>
 
     <section class="sources">
-      <div class="container">
-        <h2>Credits</h2>
-        <ul class="sources-list">
-          <li><strong>Fonts:</strong> Bowlby One and Outfit, Google Fonts.</li>
-          <li><strong>Framework:</strong> Bootstrap 5.3 (grid, navbar, forms, table).</li>
-          <li><strong>Library:</strong> jQuery 3.7.1 (accordion, scroll and fade effects).</li>
-          <li><strong>Movie posters:</strong> images belong to their studios and distributors. Source: Wikipedia and TMDB. Used here only for study.</li>
-          <li><strong>AI help:</strong> Claude by Anthropic helped to write parts of the code and the text. The author checked and understands them.</li>
-          <li><strong>Everything else:</strong> illustrations are pure CSS, made by the author.</li>
-        </ul>
-      </div>
-    </section>
+  <div class="container">
+    <h2>Credits</h2>
+
+    <ul class="sources-list">
+      <li>
+        <strong>Framework:</strong>
+        <a href="https://getbootstrap.com/">Bootstrap 5.3.3</a>
+        — grid, navigation, forms, tables and responsive components.
+      </li>
+
+      <li>
+        <strong>JavaScript library:</strong>
+        <a href="https://jquery.com/">jQuery 3.7.1</a>
+        — accordion, fades, sliding panels and smooth scrolling.
+      </li>
+
+      <li>
+        <strong>Fonts:</strong>
+        Bowlby One and Outfit from
+        <a href="https://fonts.google.com/">Google Fonts</a>.
+      </li>
+
+      <li>
+        <strong>Movie poster sources:</strong>
+        <a href="https://www.afisha.ru/">Afisha</a>,
+        <a href="https://www.amazon.com/">Amazon</a>,
+        <a href="https://www.imdb.com/">IMDb</a>,
+        <a href="https://www.rottentomatoes.com/">Rotten Tomatoes / Flixster</a>,
+        <a href="https://en.wikipedia.org/">Wikipedia</a>
+        and
+        <a href="https://www.pinterest.com/">Pinterest</a>.
+        Film posters belong to their respective rights holders.
+      </li>
+
+      <li>
+        <strong>Icons:</strong>
+        Unicode sun and moon emoji displayed using system fonts.
+      </li>
+
+      <li>
+        <strong>Illustrations:</strong>
+        the cinema screen, curtains, seats and tickets are drawn with CSS.
+      </li>
+
+      <li>
+        <strong>AI assistance — Claude, Anthropic:</strong>
+        assistance with parts of the original code and text.
+      </li>
+
+      <li>
+        <strong>AI assistance — ChatGPT, OpenAI:</strong>
+        assistance with light and dark themes, demo accounts,
+        localStorage, saved items, responsive layout,
+        accessibility, validation and jQuery effects.
+      </li>
+    </ul>
+  </div>
+</section>
   </main>
 
   <footer class="site-footer">
@@ -217,7 +310,9 @@
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/effects.js"></script>
   <script src="js/forms.js"></script>
+  <script src="js/account.js"></script>
   <script src="js/about.js"></script>
 </body>
 </html>

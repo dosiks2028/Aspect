@@ -8,10 +8,12 @@ const pickerForm = document.getElementById("picker-form");
 const pickerError = document.getElementById("picker-error");
 const result = document.getElementById("result");
 
-// Find the movie for a mood and a length
+// Find the movie for a mood and duration (up to 120 min vs over 120 min)
 function findMovie(mood, length) {
   for (let i = 0; i < movies.length; i++) {
-    if (movies[i].mood === mood && movies[i].length === length) {
+    const isShort = movies[i].minutes <= 120;
+    const lengthFits = (length === "short" && isShort) || (length === "long" && !isShort);
+    if (movies[i].mood === mood && lengthFits) {
       return movies[i];
     }
   }
@@ -33,6 +35,13 @@ pickerForm.addEventListener("submit", function (event) {
   pickerError.hidden = true;
 
   const movie = findMovie(mood, length);
+
+  if (!movie) {
+    pickerError.textContent = "No movie matches these answers.";
+    pickerError.hidden = false;
+    return;
+  }
+
   result.innerHTML =
     '<article class="ticket ' + movie.color + '">' +
       '<div class="ticket-main">' +
@@ -76,6 +85,13 @@ const movieSelect = document.getElementById("movie");
 const seatsInput = document.getElementById("seats");
 const totalText = document.getElementById("total");
 const fields = bookingForm.querySelectorAll(".form-control, .form-select");
+// Запрещаем выбор прошедших дат в самом календаре (только с сегодняшнего дня)
+const dateInput = document.getElementById("date");
+const now = new Date();
+const yyyy = now.getFullYear();
+const mm = String(now.getMonth() + 1).padStart(2, "0");
+const dd = String(now.getDate()).padStart(2, "0");
+dateInput.min = yyyy + "-" + mm + "-" + dd;
 
 // Fill the select with the movies from the array
 for (let i = 0; i < movies.length; i++) {
@@ -89,10 +105,10 @@ for (let i = 0; i < movies.length; i++) {
 function getError(field) {
   const value = field.value.trim();
 
-  if (field.id === "name") {
+if (field.id === "name") {
     if (value === "") return "Please enter your name.";
-    if (value.length < 2) return "The name must have at least 2 letters.";
-    if (!/^[A-Za-zА-Яа-яЁё\s'-]+$/.test(value)) return "The name can contain only letters.";
+    if (!/^[A-Za-zА-Яа-яЁё]+$/.test(value)) return "Use only letters, no spaces or digits.";
+    if (value.length < 3) return "The name must have at least 3 letters.";
   }
 
   if (field.id === "email") {
@@ -100,19 +116,25 @@ function getError(field) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Enter a correct email, for example name@mail.com.";
   }
 
-  if (field.id === "phone") {
+if (field.id === "phone") {
     const digits = value.replace(/[\s()-]/g, ""); // remove spaces, brackets and dashes
     if (value === "") return "Please enter your phone number.";
-    if (!/^\+7\d{10}$/.test(digits)) return "Use the format +7 701 123 45 67.";
+    if (!/^\+77\d{9}$/.test(digits)) return "Only Kazakhstan numbers (+7 701 123 45 67) are accepted.";
   }
 
   if (field.id === "movie") {
-    if (value === "") return "Please choose a movie.";
+    if (!movies.some(movie => movie.id === Number(value))) {
+      return "Please choose a movie from the list.";
+    }
   }
 
   if (field.id === "date") {
     if (value === "") return "Please choose a date.";
     const chosen = new Date(value + "T00:00:00");
+
+    if (Number.isNaN(chosen.getTime())) {
+      return "Please choose a valid date.";
+      }
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     if (chosen < today) return "The date cannot be in the past.";
@@ -129,17 +151,7 @@ function getError(field) {
 
 // Show or remove the error under one field
 function checkField(field) {
-  const message = getError(field);
-  const errorBox = field.parentElement.querySelector(".invalid-feedback");
-
-  if (message === "") {
-    field.classList.remove("is-invalid");
-    errorBox.textContent = "";
-    return true;
-  }
-  field.classList.add("is-invalid");
-  errorBox.textContent = message;
-  return false;
+  return validateField(field, getError);
 }
 
 // Calculate the total price
@@ -153,34 +165,53 @@ function updateTotal() {
   return total;
 }
 
-// While typing: fix the error of the field at once, update the total
-for (let i = 0; i < fields.length; i++) {
-  const field = fields[i];
-  field.addEventListener("input", function () {
+// Recheck fields and totals for both input and change events
+function recheckBooking() {
+  fields.forEach(function (field) {
     if (field.classList.contains("is-invalid")) {
-      checkField(field); // the error disappears when the field is corrected
+      checkField(field);
     }
-    updateTotal();
-    $("#success-box").stop(true, true).fadeOut(200); // jQuery effect 2
   });
-  field.addEventListener("change", function () {
-    if (field.classList.contains("is-invalid")) checkField(field);
-  });
+
+  updateTotal();
+  $("#success-box").stop(true, true).fadeOut(200);
 }
+
+fields.forEach(function (field) {
+  field.addEventListener("input", recheckBooking);
+  field.addEventListener("change", recheckBooking);
+});
 
 bookingForm.addEventListener("submit", function (event) {
   event.preventDefault();
+  $("#success-box").stop(true, true).hide();
 
   let allCorrect = true;
   for (let i = 0; i < fields.length; i++) {
     if (!checkField(fields[i])) allCorrect = false;
   }
-  if (!allCorrect) return; // errors are shown under the fields
+  if (!allCorrect) {
+    bookingForm.querySelector(".is-invalid").focus();
+    return;
+  }
 
   const name = document.getElementById("name").value.trim();
   const movieTitle = movieSelect.options[movieSelect.selectedIndex].textContent;
   const date = document.getElementById("date").value;
   const total = updateTotal();
+
+  const chosenMovie = movies.find(function (movie) {
+    return movie.id === Number(movieSelect.value);
+  });
+
+  if (
+    !chosenMovie ||
+    !RowFive.book(chosenMovie, date, Number(seatsInput.value), total)
+  ) {
+    return;
+  }
+
+  document.getElementById("success-text").textContent =
 
   document.getElementById("success-text").textContent =
     "Thank you, " + name + "! " + seatsInput.value + " seat(s) for " + movieTitle +
@@ -190,18 +221,4 @@ bookingForm.addEventListener("submit", function (event) {
   updateTotal();
   $("#success-box").stop(true, true).hide().fadeIn(500); // jQuery effect 2: success message
 });
-
-// ---------- jQuery effects ----------
-// Effect 3: smooth scroll to the booking form
-$("#to-reserve").on("click", function (event) {
-  event.preventDefault();
-  $("html, body").stop(true).animate({ scrollTop: $("#reserve").offset().top - 70 }, 600, function () {
-    $("#name").focus();
-  });
-});
-
-// Hover effect on the main buttons
-$(".btn-seat").hover(
-  function () { $(this).stop(true).fadeTo(150, 0.8); },
-  function () { $(this).stop(true).fadeTo(150, 1); }
-);
+updateTotal();

@@ -2,7 +2,9 @@
 // Search + filter + sort + watchlist with total time.
 
 let currentMood = "all"; // the mood chosen with the buttons
-let watchlist = [];      // ids of the movies saved by the visitor
+let watchlist = RowFive.items()
+  .filter(item => item.type === "movie")
+  .map(item => Number(item.key.replace("movie-", "")));
 
 const searchInput = document.getElementById("search");
 const sortSelect = document.getElementById("sort");
@@ -94,6 +96,8 @@ function showWatchlist() {
 
   for (let i = 0; i < watchlist.length; i++) {
     const movie = getMovieById(watchlist[i]);
+    if (!movie) continue;
+
     totalMinutes = totalMinutes + movie.minutes;
 
     const item = document.createElement("li");
@@ -117,25 +121,37 @@ movieList.addEventListener("error", function (event) {
 
 // Click on "Add to watchlist" (one listener for all posters)
 movieList.addEventListener("click", function (event) {
-  if (!event.target.classList.contains("watch-btn")) return;
+  const button = event.target.closest(".watch-btn");
+  if (!button) return;
 
-  const button = event.target;
-  const id = Number(button.dataset.id);
-  const position = watchlist.indexOf(id);
+  const movie = getMovieById(Number(button.dataset.id));
 
-  if (position === -1) {
-    watchlist.push(id);
-    button.classList.add("saved");
-    button.textContent = "In my watchlist";
-    button.setAttribute("aria-pressed", "true");
-  } else {
-    watchlist.splice(position, 1);
-    button.classList.remove("saved");
-    button.textContent = "Add to watchlist";
-    button.setAttribute("aria-pressed", "false");
+  if (movie) {
+    RowFive.toggle({
+      key: "movie-" + movie.id,
+      type: "movie",
+      title: movie.title,
+      minutes: movie.minutes
+    });
   }
-  showWatchlist();
 });
+
+window.addEventListener("rowfive:change", function () {
+  watchlist = RowFive.items()
+    .filter(item => item.type === "movie")
+    .map(item => Number(item.key.replace("movie-", "")));
+
+  showWatchlist();
+
+  movieList.querySelectorAll(".watch-btn").forEach(function (button) {
+    const saved = RowFive.has("movie-" + button.dataset.id);
+
+    button.classList.toggle("saved", saved);
+    button.textContent = saved ? "In my watchlist" : "Add to watchlist";
+    button.setAttribute("aria-pressed", String(saved));
+  });
+});
+  
 
 // Mood buttons
 for (let i = 0; i < filterButtons.length; i++) {
@@ -164,10 +180,10 @@ $("#watch-toggle").on("click", function () {
 
 // jQuery effect 3 (hover): the poster picture grows. stop(true) stops the old animation
 $("#movie-list").on("mouseenter", ".poster", function () {
-  $(this).find(".poster-art").stop(true).animate({ minHeight: "200px" }, 200);
+  $(this).find(".poster-art").stop(true, true).animate({ minHeight: "200px" }, 200);
 });
 $("#movie-list").on("mouseleave", ".poster", function () {
-  $(this).find(".poster-art").stop(true).animate({ minHeight: "170px" }, 200);
+  $(this).find(".poster-art").stop(true, true).animate({ minHeight: "170px" }, 200);
 });
 
 // Start

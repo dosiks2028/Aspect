@@ -32,12 +32,22 @@ function showFaq() {
     const element = document.createElement("div");
     element.className = "accordion-item";
     element.innerHTML =
-      '<h3 class="accordion-header">' +
-        '<button class="accordion-button collapsed" type="button" aria-expanded="false">' + item.question + '</button>' +
-      '</h3>' +
-      '<div class="accordion-collapse" style="display: none;">' +
-        '<div class="accordion-body">' + item.answer + '</div>' +
-      '</div>';
+  '<h3 class="accordion-header">' +
+    '<button class="accordion-button collapsed"' +
+      ' type="button"' +
+      ' id="faq-question-' + item.id + '"' +
+      ' aria-expanded="false"' +
+      ' aria-controls="faq-answer-' + item.id + '">' +
+      item.question +
+    '</button>' +
+  '</h3>' +
+  '<div class="accordion-collapse"' +
+    ' id="faq-answer-' + item.id + '"' +
+    ' role="region"' +
+    ' aria-labelledby="faq-question-' + item.id + '"' +
+    ' style="display: none;">' +
+    '<div class="accordion-body">' + item.answer + '</div>' +
+  '</div>';
     faqBox.appendChild(element);
     shown = shown + 1;
   }
@@ -67,9 +77,9 @@ const feedbackForm = document.getElementById("feedback-form");
 function getFeedbackError(field) {
   const value = field.value.trim();
 
-  if (field.id === "f-name") {
+if (field.id === "f-name") {
     if (value === "") return "Please enter your name.";
-    if (value.length < 2 || !isNameValid(value)) return "Use at least 2 letters, no digits.";
+    if (!isNameValid(value)) return "Use at least 3 letters, no spaces or digits.";
   }
   if (field.id === "f-email") {
     if (value === "") return "Please enter your email.";
@@ -97,16 +107,11 @@ setupForm(feedbackForm, getFeedbackError, function () {
   $("#feedback-success").stop(true, true).hide().fadeIn(500); // jQuery effect: success message
 });
 
-// Smooth scroll to the form
-$("#to-feedback").on("click", function (event) {
-  event.preventDefault();
-  $("html, body").stop(true).animate({ scrollTop: $("#feedback").offset().top - 70 }, 600);
-});
 
 // Hover effect on the crew cards
 $(".cast").hover(
-  function () { $(this).stop(true).fadeTo(150, 0.9); },
-  function () { $(this).stop(true).fadeTo(150, 1); }
+  function () { $(this).stop(true, true).fadeTo(150, 0.9); },
+  function () { $(this).stop(true, true).fadeTo(150, 1); }
 );
 
 showFaq();
