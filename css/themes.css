@@ -184,7 +184,7 @@ input[type="date"] {
 
 [data-theme="light"] .mood-btn:hover,
 [data-theme="light"] .btn-check:hover + .mood-btn,
-[data-theme="light"] .btn-check:focus + .mood-btn {
+[data-theme="light"] .btn-check:not(:checked):focus + .mood-btn {
   background-color: var(--section-bg) !important;
   color: var(--text) !important;
 }
